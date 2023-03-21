@@ -1,0 +1,51 @@
+:root{
+    --colorMain: #3C8DBB;
+    --colorMainBlack: #367FA6;
+    --colorSecundary: #2D3C42;
+    --colorSecundaryBlack: #222D30;
+    --colorRed: #DA4E3B;
+    --colorWhite: #ffffff;
+}
+
+a{
+    color: colorWhite;
+    text-decoration: none;
+}
+
+.navigation{
+    position: absolute;
+    top: 0;
+    width: 250px;
+    height: 100%;
+}
+.navigation__logo{
+    background-color: var(--colorMainBlack);
+    padding: 20px;
+    color: var(--colorWhite);
+}
+.navigation__links{
+    background-color: var(--colorSecundaryBlack);
+    height: calc(100% - 64px); 
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+
+}
+.navigation__link{
+    color: var(--colorWhite);
+    text-decoration: none;
+
+}
+.navigation ul li img{
+    color: colorWhite;
+}
+
+.navigation ul{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    padding: 0;
+}
+
