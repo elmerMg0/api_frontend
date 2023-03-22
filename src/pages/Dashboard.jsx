@@ -2,13 +2,15 @@ import React from "react";
 import Header from "../components/global/header/Header";
 import Navegation from "../components/global/header/Navegation";
 import CustomerCrud from '../components/administrator/customer/CustomerCrud'
+import ContentDashboard from "./ContentDashboard";
 const Dashboard = () => {
   return (
     <>
       <Header />
+      <div className="dashboard">
       <Navegation/>
-      <div>Dashboard</div>
-      <CustomerCrud/>
+      <ContentDashboard/>
+      </div>
     </>
   );
 };
