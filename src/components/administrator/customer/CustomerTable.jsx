@@ -2,10 +2,10 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import Paginator from "../../global/paginador/Paginator";
 import UserTableRow from "./UserTableRow";
-const UserTable = ({ customers, pageInfo, getCustomers}) => {
+const UserTable = ({ customers, pageInfo, getCustomers, setCustomerToEdit, setShow}) => {
   return (
     <Table>
-      <thead>
+      <thead className="head-table">
         <tr>
           <th>Nombre</th>
           <th>Celular</th>
@@ -17,7 +17,7 @@ const UserTable = ({ customers, pageInfo, getCustomers}) => {
       <tbody>
         {customers && customers.length > 0 ? (
           customers.map((cus) => {
-            return <UserTableRow key={cus.id} customer={cus} />;
+            return <UserTableRow key={cus.id} customer={cus} setCustomerToEdit={setCustomerToEdit} setShow={setShow}/>;
           })
         ) : (
           <tr>

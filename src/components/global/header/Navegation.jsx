@@ -4,11 +4,10 @@ import logo from "../../../assets/svg/bussines.svg";
 const Navegation = () => {
   return (
     <div className="navigation ">
-      <div className="navigation__logo">
+      {/* <div className="navigation__logo">
         Name Business
-      </div>
+      </div> */}
       <div className="navigation__links">
-        Navegation
         <ul>
           <li>
             <img src={logo} alt="svgImg" />

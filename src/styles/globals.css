@@ -7,20 +7,17 @@
     --colorWhite: #ffffff;
 }
 
-/* Globales */
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    list-style: none;
-    color: var(--colorMainBlack);
-}
 
-.header{
-    background-color: var(--colorMain);
-    padding: 21px;
-}
-.header__left{
+.btn-main {
     color: var(--colorWhite);
+    background-color: var(--colorMain);
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: 0.5s;
+}
+.btn-main:hover{
+    color: var(--colorWhite);
+    background-color: var(--colorMainBlack);
 }

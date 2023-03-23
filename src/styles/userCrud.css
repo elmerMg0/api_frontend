@@ -9,7 +9,7 @@
 
 
 .users{
-  /*  margin-left: 250px; */
+  margin: 50px;
 }
 p,h1,h2,h3,h5{
    margin: 0;
@@ -38,4 +38,11 @@ p,h1,h2,h3,h5{
 .paginator button{
    border: none;
    background-color: transparent;
+}
+.color-main{
+   background-color: var(--colorMain);
+}
+.head-table tr td{
+   background-color: var(--colorMain);
+   color: var(--colorWhite);
 }

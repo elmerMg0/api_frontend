@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { Modal } from "react-bootstrap";
+import React, { useState, useEffect} from "react";
+import { Modal} from "react-bootstrap";
 import { Form, InputGroup, ModalTitle, Button } from "react-bootstrap";
 
 const initialState = {
@@ -9,9 +9,15 @@ const initialState = {
   descripcion_domicilio:''
 }
 
-const UserModal = ({ show, setShow, create}) => {
+const UserModal = ({ show, setShow, create, customerToEdit}) => {
 
   const [customer, setCustomer] = useState(initialState)
+
+
+  useEffect ( ( ) => {
+    customerToEdit ? setCustomer(customerToEdit) : setCustomer(initialState)
+    console.log(customer)
+  },[show])
 
   const handleConfirm = () => {
     setShow(false);
@@ -39,6 +45,7 @@ const UserModal = ({ show, setShow, create}) => {
             type="text"
             onChange={handleOnChange}
             name='nombre'
+            value={customer.nombre}
           />
         </InputGroup>
         <InputGroup className="mb-3">
@@ -48,6 +55,7 @@ const UserModal = ({ show, setShow, create}) => {
             type="number"
             onChange={handleOnChange}
             name='celular'
+            value={customer.celular}
           />
         </InputGroup>
         <InputGroup className="mb-3">
@@ -57,6 +65,7 @@ const UserModal = ({ show, setShow, create}) => {
             type="text"
             onChange={handleOnChange}
             name='direccion'
+            value={customer.direccion}
           />
         </InputGroup>
         <InputGroup className="mb-3">
@@ -66,13 +75,14 @@ const UserModal = ({ show, setShow, create}) => {
             type="text"
             onChange={handleOnChange}
             name='descripcion_domicilio'
+            value={customer.descripcion_domicilio}
           />
         </InputGroup>
 
       </Modal.Body>
       <Modal.Footer >
-        <Button variant='danger' onClick={()=> setShow(false)}>Cancelar</Button>
-        <Button onClick={handleConfirm} className="color-main">Confirmar</Button>
+        <button variant='danger' onClick={()=> setShow(false)}>Cancelar</button>
+        <button onClick={handleConfirm} className="btn-main">Confirmar</button>
       </Modal.Footer>
     </Modal>
   );
