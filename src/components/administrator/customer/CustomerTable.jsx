@@ -2,7 +2,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import Paginator from "../../global/paginador/Paginator";
 import UserTableRow from "./UserTableRow";
-const UserTable = ({ customers, pageInfo}) => {
+const UserTable = ({ customers, pageInfo, getCustomers}) => {
   return (
     <Table>
       <thead>
@@ -11,6 +11,7 @@ const UserTable = ({ customers, pageInfo}) => {
           <th>Celular</th>
           <th>Direccion</th>
           <th>Descripcion</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -20,12 +21,12 @@ const UserTable = ({ customers, pageInfo}) => {
           })
         ) : (
           <tr>
-            <td colSpan={4}>Nada</td>
+            <td colSpan={5}>No existen usuarios aun!</td>
           </tr>
         )}
         <tr>
-          <td colSpan={4}>
-            <Paginator pageInfo={pageInfo} />
+          <td colSpan={5}>
+            <Paginator pageInfo={pageInfo} getCustomers={getCustomers}/>
           </td>
         </tr>
       </tbody>
