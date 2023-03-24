@@ -11,6 +11,9 @@
 .users{
   margin: 50px;
 }
+.users h3{
+   margin: 0;
+}
 p,h1,h2,h3,h5{
    margin: 0;
    padding: 0;
@@ -54,13 +57,15 @@ p,h1,h2,h3,h5{
 }
 .head-table tr th{
    color: var(--colorWhite);
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   font-weight: 500;
 }
 
 /* Search bar  */
 .search-bar{
    display: flex;
    gap: 10px;
-   margin: 10px 0px;
+   margin: 15px 0px;
    display: relative;
 }
 .row-table-notExist{

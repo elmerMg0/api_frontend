@@ -14,7 +14,8 @@
     margin: 0;
     text-decoration: none;
     list-style: none;
-    color: var(--colorMainBlack);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: var(--colorSecundary);
 }
 
 .header{

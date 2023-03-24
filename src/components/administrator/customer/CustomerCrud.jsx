@@ -60,6 +60,7 @@ const UserCrud = () => {
     let $params = `idCustomer=${customer.id}`;
     const response = await APISERVICE.post(customer, $url, $params);
     if (response.status === 200) {
+      messageToast('Cliente Actualizado con exito!')
       getCustomers();
     }
   };
@@ -74,6 +75,7 @@ const UserCrud = () => {
     const response = await APISERVICE.delete(url, customerToDelete);
     if (response.status === 200) {
       getCustomers();
+      messageToast('Cliente eliminado con exito!')
     }
     setShowModalConfirm(false);
   };
@@ -89,8 +91,8 @@ const UserCrud = () => {
 
   return (
     <div className="users">
-      <SearchBar setShow={setShow} filterCustomers={filterCustomers} />
       <h3>Clientes</h3>
+      <SearchBar setShow={setShow} filterCustomers={filterCustomers} />
       {customersFilter.length > 0 ? (
         <CustomerTable
           customers={customersFilter}

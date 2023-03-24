@@ -5,8 +5,8 @@ const ContentDashboard = () => {
     //aqui todos los componente customers, users, products, etc
   return (
     <>
-      <CustomerCrud/>
-      {/* <CategoryCrud/> */}
+     {/*  <CustomerCrud/> */}
+      <CategoryCrud/>
     </>
   )
 }

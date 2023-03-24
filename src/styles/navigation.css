@@ -57,14 +57,10 @@ a{
 }
 
 .navigation ul li{
-    display: flex;
+   /*  display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 8px; */
     padding: 7px 0px;
-}
-
-.navigation ul li:hover{
-    background-color: var(--colorSecundary);
 }
 
 .navigation ul li:hover{
@@ -75,5 +71,8 @@ a{
     background-color: var(--colorSecundary);
 }
 .navigation__content{
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin: 0px 25px;
 }
