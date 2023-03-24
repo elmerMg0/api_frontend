@@ -1,0 +1,48 @@
+:root{
+   --colorMain: #3C8DBB;
+   --colorMainBlack: #367FA6;
+   --colorSecundary: #2D3C42;
+   --colorSecundaryBlack: #222D30;
+   --colorRed: #DA4E3B;
+   --colorWhite: #ffffff;
+}
+
+
+.users{
+  margin: 50px;
+}
+p,h1,h2,h3,h5{
+   margin: 0;
+   padding: 0;
+}
+.dashboard{
+   display: grid;
+   grid-template-columns: 1fr 5fr;
+}
+
+@media ( max-width: 768px ){
+   .dashboard{
+      grid-template-columns: 1fr 4fr;
+   }
+}
+.paginator{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 20px;
+}
+
+.paginator p,.paginator h5{
+   margin: 0;
+}
+.paginator button{
+   border: none;
+   background-color: transparent;
+}
+.color-main{
+   background-color: var(--colorMain);
+}
+.head-table tr td{
+   background-color: var(--colorMain);
+   color: var(--colorWhite);
+}
