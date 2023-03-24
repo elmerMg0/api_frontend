@@ -61,7 +61,13 @@ p,h1,h2,h3,h5{
    display: flex;
    gap: 10px;
    margin: 10px 0px;
+   display: relative;
 }
 .row-table-notExist{
    text-align: center;
+}
+.search-bar img{
+   position: absolute;
+   right: 10px;
+   bottom: 10px;
 }

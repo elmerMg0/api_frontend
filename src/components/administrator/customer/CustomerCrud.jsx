@@ -26,12 +26,12 @@ const UserCrud = () => {
 
   const getCustomers = async (pageNumber = 1) => {
     let url = "cliente/?";
-    let params = `page+${pageNumber}`;
+    let params = `page=${pageNumber}`;
     const response = await APISERVICE.get(url, params);
     if (response.status === 200) {
-      setPageInfo(response.pageInfo);
-      setCustomers(response.pageInfo.customers);
     }
+    setPageInfo(response.pageInfo);
+    setCustomers(response.pageInfo.customers);
   };
 
   const getCustomersAll = async () => {
@@ -90,7 +90,7 @@ const UserCrud = () => {
   return (
     <div className="users">
       <SearchBar setShow={setShow} filterCustomers={filterCustomers} />
-      <h3>Lista de Clientes</h3>
+      <h3>Clientes</h3>
       {customersFilter.length > 0 ? (
         <CustomerTable
           customers={customersFilter}
@@ -124,9 +124,6 @@ const UserCrud = () => {
         </>
       )}
 
-      <button className="btn-main" onClick={() => setShow(true)}>
-        Nuevo
-      </button>
       <CustomerModal
         show={show}
         setShow={setShow}
