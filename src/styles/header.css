@@ -20,7 +20,12 @@
 .header{
     background-color: var(--colorMain);
     padding: 21px;
+    display: flex;
+    justify-content: space-between;
 }
 .header__left{
+    color: var(--colorWhite);
+}
+.header h5{
     color: var(--colorWhite);
 }

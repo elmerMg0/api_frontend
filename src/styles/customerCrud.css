@@ -38,11 +38,30 @@ p,h1,h2,h3,h5{
 .paginator button{
    border: none;
    background-color: transparent;
+   transition: 0.5s;
+   padding: 0px 5px;
+}
+.paginator button:hover{
+   background-color: var(--colorMain);
+   color: var(--colorWhite);
+   border-radius: 10px;
 }
 .color-main{
    background-color: var(--colorMain);
 }
-.head-table tr td{
+.head-table tr{
    background-color: var(--colorMain);
+}
+.head-table tr th{
    color: var(--colorWhite);
+}
+
+/* Search bar  */
+.search-bar{
+   display: flex;
+   gap: 10px;
+   margin: 10px 0px;
+}
+.row-table-notExist{
+   text-align: center;
 }

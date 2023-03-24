@@ -1,10 +1,15 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-const UserTableRow = ({ customer, setCustomerToEdit, setShow }) => {
+import  edit from '../../../assets/svg/edit.svg'
+import  trash from '../../../assets/svg/trash.svg'
+const UserTableRow = ({ customer, setCustomerToEdit, setShow, deleteCustomer }) => {
 
   const handleEditCustomer = ()  => {
     setCustomerToEdit(customer);
     setShow(true);
+  }
+  const handleDeleteCustomer = () => {
+    deleteCustomer(customer.id)
   }
 
   return (
@@ -14,10 +19,10 @@ const UserTableRow = ({ customer, setCustomerToEdit, setShow }) => {
       <td>{customer.direccion}</td>
       <td>{customer.descripcion_domicilio}</td>
       <th>
-        <button className="btn-main" onClick={() => handleEditCustomer() }>Editar</button>{" "}
-        <Button variant="danger" className="color-main">
-          Eliminar
-        </Button>
+        <button className="btn-main" onClick={() => handleEditCustomer() }> <img src={edit} alt="icon-edit" /> </button>{" "}
+        <button className="btn-main-red" onClick={() => handleDeleteCustomer()}>
+          <img src={trash} alt="icon-basura" />
+        </button>
       </th>
     </tr>
   );

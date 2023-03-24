@@ -3,10 +3,8 @@ import React from 'react'
 const Header = () => {
   return (
     <div className='header'>
-        <div className='header__left'>
-            Name Bussines
-        </div>
-        <div className='header__rigth'></div>
+        <h5>Bussines Name</h5>
+        <h5>Username</h5>
     </div>
   )
 }

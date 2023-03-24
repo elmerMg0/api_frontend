@@ -4,6 +4,7 @@
     --colorSecundary: #2D3C42;
     --colorSecundaryBlack: #222D30;
     --colorRed: #DA4E3B;
+    --colorRedBlack: #e4412b;
     --colorWhite: #ffffff;
 }
 
@@ -17,7 +18,22 @@
     border: none;
     transition: 0.5s;
 }
+
+.btn-main-red {
+    color: var(--colorWhite);
+    background-color: var(--colorRed);
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: 0.5s;
+}
 .btn-main:hover{
     color: var(--colorWhite);
     background-color: var(--colorMainBlack);
+}
+
+.btn-main-red:hover{
+    color: var(--colorWhite);
+    background-color: var(--colorRedBlack);
 }
