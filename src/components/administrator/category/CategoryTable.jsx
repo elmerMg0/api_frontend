@@ -5,7 +5,7 @@ import CategoryTableRow from "./CategoryTableRow";
 const CategoryTable = ({
   categories,
   pageInfo,
-  getcategories,
+  getCategories,
   setCategoryToEdit,
   setShow,
   deleteCategory,
@@ -27,7 +27,7 @@ const CategoryTable = ({
               <CategoryTableRow
                 key={cat.id}
                 category={cat}
-                setCustomerToEdit={setCategoryToEdit}
+                setCategoryToEdit={setCategoryToEdit}
                 setShow={setShow}
                 deleteCategory={deleteCategory}
               />
@@ -43,7 +43,7 @@ const CategoryTable = ({
         <tr>
           <td colSpan={5}>
             {categories.length > 0 && (
-              <Paginator pageInfo={pageInfo} getcategories={getcategories} />
+              <Paginator pageInfo={pageInfo} getData={getCategories} />
             )}
           </td>
         </tr>

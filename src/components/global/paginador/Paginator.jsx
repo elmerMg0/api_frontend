@@ -1,11 +1,11 @@
 import React from "react";
 
-const Paginator = ({ pageInfo, getCustomers }) => {
+const Paginator = ({ pageInfo, getData }) => {
   let { page, count, next, previus, start, totalPages } = pageInfo;
 
-  const handlePrevius = () => getCustomers(previus);
+  const handlePrevius = () => getData(previus);
 
-  const handleNext = () => getCustomers(next);
+  const handleNext = () => getData(next);
 
   return (
     <div className="paginator">

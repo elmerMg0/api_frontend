@@ -4,96 +4,133 @@ import { Form, InputGroup, ModalTitle, Button } from "react-bootstrap";
 
 const initialState = {
   nombre:'',
-  celular: '',
-  direccion: '',
-  descripcion_domicilio:''
+  descripcion: '',
+  url_image: ''
 }
 
-const CategoryModal = ({ show, setShow, create, customerToEdit, setCustomerToEdit ,updateCustomer}) => {
+const CategoryModal = ({ show, setShow, create, categoryToEdit, setCategoryToEdit ,updateCategory}) => {
 
-  const [customer, setCustomer] = useState(initialState)
+  const [category, setcategory] = useState(initialState)
+  const [selectedImage, setSelectedImage] = useState(null);
 
 
   useEffect ( ( ) => {
-    if(Object.keys(customerToEdit).length !== 0){
-      setCustomer(customerToEdit) 
+    console.log(categoryToEdit)
+    if(categoryToEdit && Object.keys(categoryToEdit).length !== 0){
+      setcategory(categoryToEdit) 
     }else{
-      setCustomer(initialState)
+      setcategory(initialState)
     }
-    console.log(customer)
+    console.log(category)
   },[show])
 
   const handleConfirm = () => {
     setShow(false);
-    if( !customer.id ){
-      create(customer);
+    if( !category.id ){
+      create(category, selectedImage);
     }else{
-      updateCustomer(customer);
+      updateCategory(category, selectedImage);
     }
-    //create(customer);
-    setCustomerToEdit({})
+    //create(category);
+    setCategoryToEdit({})
+    setSelectedImage(null)
   }
   const handleOnChange = (e) => {
-    setCustomer({
-      ...customer, 
+    setcategory({
+      ...category, 
       [e.target.name]:e.target.value
+    })
+  }
+
+  const handleFileChange = (e) => {
+    setcategory({
+      ...category, 
+      [e.target.name]:e.target.files[0]
     })
   }
 
   const handleCancel = () => {
     setShow(false)
-    setCustomerToEdit({})
+    setCategoryToEdit({})
   }
 
+  const handleImageChange = (event) => {
+    setcategory({
+      ...category, 
+      [event.target.name]:event.target.files[0]
+    })
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSelectedImage(e.target.result);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  };
+  
   return (
     <Modal show={show} size="md" centered backdrop>
       <Modal.Header>
         <Modal.Title>
-          <h3>Crear Nuevo Cliente</h3>
+          <h3>Crear nueva categoria</h3>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body >
         <InputGroup className="mb-3">
           <InputGroup.Text>Nombre</InputGroup.Text>
           <Form.Control 
-            placeholder="Nombre"
+            placeholder="Piques"
             type="text"
             onChange={handleOnChange}
             name='nombre'
-            value={customer.nombre}
+            value={category.nombre}
             required
           />
         </InputGroup>
+ 
         <InputGroup className="mb-3">
-          <InputGroup.Text>Celular</InputGroup.Text>
+          <InputGroup.Text>Descripcion</InputGroup.Text>
           <Form.Control 
-            placeholder="65322415"
-            type="number"
-            onChange={handleOnChange}
-            name='celular'
-            value={customer.celular}
-          />
-        </InputGroup>
-        <InputGroup className="mb-3">
-          <InputGroup.Text>Direccion</InputGroup.Text>
-          <Form.Control 
-            placeholder="Av. Petrolera km 5.4"
+            placeholder="varidad de piques..."
             type="text"
             onChange={handleOnChange}
-            name='direccion'
-            value={customer.direccion}
+            name='descripcion'
+            value={category.descripcion}
           />
         </InputGroup>
         <InputGroup className="mb-3">
-          <InputGroup.Text>Descripcion domicilio</InputGroup.Text>
+      
           <Form.Control 
-            placeholder="Casa roja, puerta verde"
-            type="text"
-            onChange={handleOnChange}
-            name='descripcion_domicilio'
-            value={customer.descripcion_domicilio}
+            placeholder="pique.jpg"
+            type="file"
+            onChange={handleImageChange}
+            name='url_image'
+           /*  value={category.url_image} */
+            accept='.jpg,.png,jpng'
           />
         </InputGroup>
+        {
+          selectedImage ?
+          <div className="modal-category-image">
+            <img src={selectedImage} alt="preview"  />
+          </div>
+            :
+            <>
+              {
+                category.url_image && category.url_image.length > 0 &&
+                <div className="modal-category-image">
+                  <img src={`http://localhost:8080/upload/${category.url_image}`} alt="a" />
+                </div>
+                
+              }
+              </> 
+            
+
+         }
+       {/*   {selectedImage && (
+            
+          )}
+ */}
 
       </Modal.Body>
       <Modal.Footer >

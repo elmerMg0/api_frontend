@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-const ModalConfirmCategory = ({ show, onHide, deleteCustomer}) => {
+const ModalConfirmCategory = ({ show, onHide, deleteCategory}) => {
   return (
     <Modal show={show} centered>
       <Modal.Header>
@@ -13,7 +13,7 @@ const ModalConfirmCategory = ({ show, onHide, deleteCustomer}) => {
       </Modal.Body>
       <Modal.Footer>
         <button className="btn-main-red" onClick={() => onHide(false)}>Cancelar</button>
-        <button className="btn-main" onClick={()=> deleteCustomer()}>Aceptar</button>
+        <button className="btn-main" onClick={()=> deleteCategory()}>Aceptar</button>
       </Modal.Footer>
     </Modal>
   );

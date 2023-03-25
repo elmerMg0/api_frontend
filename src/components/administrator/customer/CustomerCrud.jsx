@@ -72,7 +72,8 @@ const UserCrud = () => {
 
   const deleteCustomerToServer = async () => {
     let url = "cliente/delete?";
-    const response = await APISERVICE.delete(url, customerToDelete);
+    let params = `idCustomer=${customerToDelete}`
+    const response = await APISERVICE.delete(url, params);
     if (response.status === 200) {
       getCustomers();
       messageToast('Cliente eliminado con exito!')

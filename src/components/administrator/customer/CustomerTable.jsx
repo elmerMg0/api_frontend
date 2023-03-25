@@ -44,7 +44,7 @@ const UserTable = ({
         <tr>
           <td colSpan={5}>
             {customers.length > 0 && (
-              <Paginator pageInfo={pageInfo} getCustomers={getCustomers} />
+              <Paginator pageInfo={pageInfo} getData={getCustomers} />
             )}
           </td>
         </tr>

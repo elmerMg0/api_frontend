@@ -6,18 +6,19 @@ import CategoryModal from "./CategoryModal";
 import ModalConfirmCategory from "../../administrator/category/ModalConfirmCategory";
 import SearchBarCategory from "./SearchBarCategory";
 import { Toaster, toast} from "react-hot-toast";
+import categoryCrud from '../../../styles/categoryCrud.css'
 
 const CategoryCrud = () => {
   const [categories, setcategories] = useState([]);
   const [pageInfo, setPageInfo] = useState({});
   const [show, setShow] = useState(false);
   const [showModalConfirm, setShowModalConfirm] = useState(false);
-  const [categoryToEdit, setcategoryToEdit] = useState({});
-  const [categoryToDelete, setcategoryToDelete] = useState({});
-  const [categoriesAll, setcategoriesAll] = useState([]);
-  const [categoriesFilter, setcategoriesFilter] = useState([]);
-  const [inputSearchCustomer, setInputSearchCustomer] = useState("");
-  const [imageCategory, setimageCategory] = useState(null);
+  const [categoryToEdit, setCategoryToEdit] = useState({});
+  const [categoryToDelete, setCategoryToDelete] = useState({});
+  const [categoriesAll, setCategoriesAll] = useState([]);
+  const [categoriesFilter, setCategoriesFilter] = useState([]);
+  const [inputSearchCategory, setInputSearchCategory] = useState("");
+  const [imageCategory, setImageCategory] = useState(null);
 
   useEffect(() => {
     getCategories();
@@ -38,21 +39,26 @@ const CategoryCrud = () => {
     let url = "categoria/categories";
     const response = await APISERVICE.get(url);
     if (response.status === 200) {
-      setcategoriesAll(response.categories);
+      setCategoriesAll(response.categories);
     }
   };
 
-  const createNewCategory = async (customer) => {
+  const createNewCategory = async (category, image) => {
+    //envio de info en body
     let url = "categoria/create";
-    const response = await APISERVICE.post(customer, url);
+    const formData = new FormData();
+    let data = {
+      nombre: category.nombre,
+      descripcion: category.descripcion
+    }
+    formData.append('data',JSON.stringify(data))
+    if(image)formData.append('file', category.url_image) 
+
+    const response = await APISERVICE.postWithImage(formData, url);
     if (response.status === 201) {
       messageToast('Cliente agregado exitosamente!')
     }
-    const formData = new FormData();
-    formData.append('image',imageCategory)
-    const response2 = await APISERVICE.uploadImage();
-
-    
+    //envio de imagen categoria
     getCategories();
 
 
@@ -62,24 +68,34 @@ const CategoryCrud = () => {
     toast.success(message)
   }
 
-  const updateCategory = async (customer) => {
-    let $url = `cliente/update?`;
-    let $params = `idCustomer=${customer.id}`;
-    const response = await APISERVICE.post(customer, $url, $params);
+  const updateCategory = async (category, image) => {
+    let $url = `categoria/update?`;
+    let $params = `idCategory=${category.id}`;
+
+    const fd = new FormData()
+    
+    let body = {
+      nombre: category.nombre,
+      descripcion: category.descripcion
+    }
+    fd.append('data', JSON.stringify(body));
+    if(image)fd.append('file', category.url_image) 
+    const response = await APISERVICE.postWithImage(fd, $url, $params);
     if (response.status === 200) {
       messageToast('Cliente Actualizado con exito!')
-      getCategories();
     }
+    getCategories();
   };
 
   const deleteCategory = async (id) => {
     setShowModalConfirm(true);
-    setcategoryToDelete(id);
+    setCategoryToDelete(id);
   };
 
   const deleteCategoryToServer = async () => {
-    let url = "cliente/delete?";
-    const response = await APISERVICE.delete(url, categoryToDelete);
+    let url = "categoria/delete?";
+    let params = `idCategory=${categoryToDelete}`
+    const response = await APISERVICE.delete(url, params);
     if (response.status === 200) {
       getCategories();
       messageToast('Cliente eliminado con exito!')
@@ -87,11 +103,11 @@ const CategoryCrud = () => {
     setShowModalConfirm(false);
   };
 
-  const filtercategories = (customer) => {
-    setInputSearchCustomer(customer);
-    setcategoriesFilter(
+  const filtercategories = (category) => {
+    setInputSearchCategory(category);
+    setCategoriesFilter(
       categories.filter((cus) =>
-        cus.nombre.toLowerCase().includes(customer.toLowerCase())
+        cus.nombre.toLowerCase().includes(category.toLowerCase())
       )
     );
   };
@@ -105,18 +121,18 @@ const CategoryCrud = () => {
           categories={categoriesFilter}
           pageInfo={pageInfo}
           getCategories={getCategories}
-          setcategoryToEdit={setcategoryToEdit}
+          setCategoryToEdit={setCategoryToEdit}
           setShow={setShow}
           deleteCategory={deleteCategory}
         />
       ) : (
         <>
-          {inputSearchCustomer.length > 0 ? (
+          {inputSearchCategory.length > 0 ? (
             <CategoryTable
               categories={{}}
               pageInfo={pageInfo}
               getCategories={getCategories}
-              setcategoryToEdit={setcategoryToEdit}
+              setCategoryToEdit={setCategoryToEdit}
               setShow={setShow}
               deleteCategory={deleteCategory}
             />
@@ -125,7 +141,7 @@ const CategoryCrud = () => {
               categories={categories}
               pageInfo={pageInfo}
               getCategories={getCategories}
-              setcategoryToEdit={setcategoryToEdit}
+              setCategoryToEdit={setCategoryToEdit}
                setShow={setShow}
               deleteCategory={deleteCategory}
             />
@@ -136,14 +152,14 @@ const CategoryCrud = () => {
         show={show}
         setShow={setShow}
         create={createNewCategory}
-        customerToEdit={categoryToEdit}
-        setCustomerToEdit={setcategoryToEdit}
-        updateCustomer={updateCategory}
+        categoryToEdit={categoryToEdit}
+        setCategoryToEdit={setCategoryToEdit}
+        updateCategory={updateCategory}
       />
       <ModalConfirmCategory
         show={showModalConfirm}
         onHide={setShowModalConfirm}
-        deleteCustomer={deleteCategoryToServer}
+        deleteCategory={deleteCategoryToServer}
       />
         <Toaster
       position="top-right"

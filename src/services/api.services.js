@@ -27,9 +27,25 @@ export const APISERVICE = {
             console.log(error)
         }
     },
-    delete: async ( url, id) => {
+    postWithImage: async ( body,url, params='') => {
         try{
-            const response = await fetch(`${APIURL}${url}idCustomer=${id}`,{
+            const response = await fetch(`${APIURL}${url}${params}`,{
+                method:'POST',
+              /*   headers: {
+                    'content-type':'application/json'
+                }, */
+                body: body
+            })
+            const data = await response.json()
+            data.status = response.status; 
+            return data;
+        }catch(error){
+            console.log(error)
+        }
+    },
+    delete: async ( url, params) => {
+        try{
+            const response = await fetch(`${APIURL}${url}${params}`,{
                 method:'DELETE',
             })
             const data = await response.json()

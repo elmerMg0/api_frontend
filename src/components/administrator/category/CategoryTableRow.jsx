@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import  edit from '../../../assets/svg/edit.svg'
 import  trash from '../../../assets/svg/trash.svg'
 const CategoryTableRow = ({ category, setCategoryToEdit, setShow, deleteCategory }) => {
+  const APIURLIMG =  process.env.REACT_APP_API_URL_IMG
 
   let {nombre, descripcion } = category;
 
@@ -18,7 +19,7 @@ const CategoryTableRow = ({ category, setCategoryToEdit, setShow, deleteCategory
     <tr>
       <td>{category.nombre}</td>
       <td>{category.descripcion}</td>
-      <td>{category.url_image}</td>
+      <td className="row-table-img"><img src={`http://localhost:8080/upload/${category.url_image}`} alt="a" /></td>
       <th>
         <button className="btn-main" onClick={() => handleEditcategory() }> <img src={edit} alt="icon-edit" /> </button>{" "}
         <button className="btn-main-red" onClick={() => handleDeletecategory()}>

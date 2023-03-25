@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { InputGroup, Form } from 'react-bootstrap'
 import search from '../../../assets/svg/search.svg'
-const SearchBarCategory = ( { setShow, filterCustomers} ) => {
+const SearchBarCategory = ( { setShow, filtercategories} ) => {
 
   const handleOnChange = (e) => {
-    filterCustomers(e.target.value);
+    filtercategories(e.target.value);
   }
 
   return (
