@@ -9,7 +9,17 @@ import pos from "../../../assets/svg/pos.svg";
 import report from "../../../assets/svg/report.svg";
 import help from "../../../assets/svg/help.svg";
 import infoCircle from "../../../assets/svg/infoCircle.svg";
+import { Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { createView } from "../../../redux/states/dashboard";
 const Navegation = () => {
+
+  const dispatch = useDispatch();
+  const view = useSelector(store => store.dashboard)
+  const handleOnClick = ( view ) => {
+    window.localStorage.setItem('view',view);
+    dispatch(createView(view))
+  }
   return (
     <div className="navigation ">
       {/* <div className="navigation__logo">
@@ -17,84 +27,84 @@ const Navegation = () => {
       </div> */}
       <div className="navigation__links">
         <ul>
-          <li>
+          <li className={ view === 'bussines' ? 'bg-link':'' }>
             <div className="navigation__content">
               <img src={bussines} alt="svgImg" />
-              <Link className="navigation__link" to="/">
+              <button onClick={() => handleOnClick('bussines')} className="navigation__link" to="/">
                 Empresa
-              </Link>
+              </button>
             </div>
           </li>
-          <li className="bg-link">
+          <li className={ view === 'customer' ? 'bg-link':'' }>
             <div className="navigation__content">
               <img src={customer} alt="svgImg" />
-              <Link className="navigation__link" href="">
+              <button onClick={() => handleOnClick('customer')} className="navigation__link" href="">
                 Clientes
-              </Link>
+              </button>
             </div>
           </li>
-          <li>
+          <li className={ view === 'user' ? 'bg-link':'' }>
             <div className="navigation__content">
-              <Link className="navigation__link" href="">
+              <button onClick={() => handleOnClick('user')} className="navigation__link" href="">
               <img src={user} alt="svgImg" />
                 Usuarios
-              </Link>
+              </button>
             </div>
           </li>
-          <li>
+          <li className={ view === 'product' ? 'bg-link':'' }>
             <div className="navigation__content">
               <img src={product} alt="svgImg" />
-              <Link className="navigation__link" href="">
+              <button onClick={() => handleOnClick('product')} className="navigation__link" href="">
                 Productos
-              </Link>
+              </button>
             </div>
           </li>
-          <li>
+          <li className={ view === 'category' ? 'bg-link':'' }>
             <div className="navigation__content">
               <img src={bussines} alt="svgImg" />
-              <Link className="navigation__link" href="">
+              <button onClick={() => handleOnClick('category')} className="navigation__link" href="">
                 Categorias
-              </Link>
+              </button>
             </div>
           </li>
-          <li>
+          <li className={ view === 'orderApp' ? 'bg-link':'' }>
             <div className="navigation__content">
               <img src={trolley} alt="svgImg" />
-              <Link className="navigation__link" href="">
+              <button onClick={() => handleOnClick('orderApp')} className="navigation__link" href="">
                 Pedidos App
-              </Link>
+              </button>
             </div>
           </li>
-          <li>
+          <li className={ view === 'pos' ? 'bg-link':'' }>
             <div className="navigation__content">
               <img src={pos} alt="svgImg" />
-              <Link className="navigation__link" href="">
+              <button onClick={() => handleOnClick('pos')} className="navigation__link" href="">
                 Punto de Venta
-              </Link>
+              </button>
             </div>
           </li>
-          <li>
+          <li className={ view === 'report' ? 'bg-link':'' }>
             <div className="navigation__content">
               <img src={report} alt="svgImg" />
-              <Link className="navigation__link" href="">
+              <button onClick={() => handleOnClick('report')} className="navigation__link" href="">
                 Reportes
-              </Link>
+              </button>
             </div>
           </li>
-          <li>
+          <li className={ view === 'help' ? 'bg-link':'' }>
             <div className="navigation__content">
               <img src={help} alt="svgImg" />
-              <Link className="navigation__link" href="">
+              <button onClick={() => handleOnClick('help')} className="navigation__link" href="">
                 Ayuda
-              </Link>
+              </button>
             </div>
           </li>
-          <li>
+          <li className={ view === 'about' ? 'bg-link':'' }>
             <div className="navigation__content">
-              <img src={bussines} alt="svgImg" />
-              <Link className="navigation__link" href="">
+              <img src={infoCircle} alt="svgImg" />
+              <button onClick={() => handleOnClick('about')} className="navigation__link" href="">
                 Acerca de
-              </Link>
+              </button>
             </div>
           </li>
         </ul>

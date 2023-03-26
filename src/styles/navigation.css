@@ -76,3 +76,7 @@ a{
     gap: 8px;
     margin: 0px 25px;
 }
+.navigation__content button{
+    background-color: transparent;
+    border: none;
+}

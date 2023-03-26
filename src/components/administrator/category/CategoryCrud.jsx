@@ -56,7 +56,7 @@ const CategoryCrud = () => {
 
     const response = await APISERVICE.postWithImage(formData, url);
     if (response.status === 201) {
-      messageToast('Cliente agregado exitosamente!')
+      messageToast('Categoria agregado exitosamente!')
     }
     //envio de imagen categoria
     getCategories();
@@ -82,7 +82,7 @@ const CategoryCrud = () => {
     if(image)fd.append('file', category.url_image) 
     const response = await APISERVICE.postWithImage(fd, $url, $params);
     if (response.status === 200) {
-      messageToast('Cliente Actualizado con exito!')
+      messageToast('Categoria Actualizado con exito!')
     }
     getCategories();
   };
@@ -98,7 +98,7 @@ const CategoryCrud = () => {
     const response = await APISERVICE.delete(url, params);
     if (response.status === 200) {
       getCategories();
-      messageToast('Cliente eliminado con exito!')
+      messageToast('Categoria eliminado con exito!')
     }
     setShowModalConfirm(false);
   };
