@@ -18,12 +18,12 @@ const UserTableRow = ({ customer, setCustomerToEdit, setShow, deleteCustomer }) 
       <td>{customer.celular}</td>
       <td>{customer.direccion}</td>
       <td>{customer.descripcion_domicilio}</td>
-      <th>
+      <td className="col-2" style={{textAlign: 'center'}}>
         <button className="btn-main" onClick={() => handleEditCustomer() }> <img src={edit} alt="icon-edit" /> </button>{" "}
         <button className="btn-main-red" onClick={() => handleDeleteCustomer()}>
           <img src={trash} alt="icon-basura" />
         </button>
-      </th>
+      </td>
     </tr>
   );
 };
