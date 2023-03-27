@@ -9,14 +9,17 @@ const ProductTable = ({
   setShow,
   deleteProduct,
 }) => {
-  return <div className='container-products'>
-      {
-        products && products.length > 0 ?
-          products.map((prod) =>  <ProductTableCard key={prod.id} product={prod} />)
-        :
+  return (
+    <div className="container-products">
+      {products && products.length > 0 ? (
+        products.map((prod) => (
+          <ProductTableCard key={prod.id} product={prod} />
+        ))
+      ) : (
         <h3>No existem productos aun</h3>
-      }
-  </div>
+      )}
+    </div>
+  );
 };
 
 export default ProductTable;
