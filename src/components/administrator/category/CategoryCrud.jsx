@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import CategoryTable from "./CategoryTable";
 import { APISERVICE } from "../../../services/api.services";
-import { Button } from "react-bootstrap";
 import CategoryModal from "./CategoryModal";
 import ModalConfirmCategory from "../../administrator/category/ModalConfirmCategory";
-import SearchBarCategory from "./SearchBarCategory";
 import { Toaster, toast} from "react-hot-toast";
 import categoryCrud from '../../../styles/categoryCrud.css'
+import SearchInput from "../../global/search/SearchInput";
 
 const CategoryCrud = () => {
   const [categories, setcategories] = useState([]);
@@ -115,7 +114,7 @@ const CategoryCrud = () => {
   return (
     <div className="users">
       <h3>Categorias</h3>
-      <SearchBarCategory setShow={setShow} filtercategories={filtercategories} />
+      <SearchInput setShow={setShow} filterSomething={filtercategories} />
       {categoriesFilter.length > 0 ? (
         <CategoryTable
           categories={categoriesFilter}

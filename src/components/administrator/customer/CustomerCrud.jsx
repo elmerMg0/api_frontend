@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CustomerTable from "./CustomerTable";
 import { APISERVICE } from "../../../services/api.services";
-import { Button } from "react-bootstrap";
 import CustomerModal from "./CustomerModal";
 import ModalConfirm from "../../global/modal/ModalConfirm";
-import SearchBar from "./SearchBar";
 import { Toaster, toast} from "react-hot-toast";
+import SearchInput from "../../global/search/SearchInput";
 
 const UserCrud = () => {
   const [customers, setCustomers] = useState([]);
@@ -93,7 +92,7 @@ const UserCrud = () => {
   return (
     <div className="users">
       <h3>Clientes</h3>
-      <SearchBar setShow={setShow} filterCustomers={filterCustomers} />
+      <SearchInput setShow={setShow} filterSomething={filterCustomers} />
       {customersFilter.length > 0 ? (
         <CustomerTable
           customers={customersFilter}
