@@ -8,6 +8,12 @@
     --colorWhite: #ffffff;
 }
 
+.category{
+    margin: 50px;
+  }
+.category h3{
+     margin: 0;
+  } 
 .row-table-img{
     width: 10px;
 }

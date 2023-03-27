@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { Modal} from "react-bootstrap";
-import { Form, InputGroup, ModalTitle, Button } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 
 const initialState = {
   nombre:'',

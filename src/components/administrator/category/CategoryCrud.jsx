@@ -17,7 +17,6 @@ const CategoryCrud = () => {
   const [categoriesAll, setCategoriesAll] = useState([]);
   const [categoriesFilter, setCategoriesFilter] = useState([]);
   const [inputSearchCategory, setInputSearchCategory] = useState("");
-  const [imageCategory, setImageCategory] = useState(null);
 
   useEffect(() => {
     getCategories();
@@ -103,19 +102,25 @@ const CategoryCrud = () => {
   };
 
   const filtercategories = (category) => {
-    setInputSearchCategory(category);
-    setCategoriesFilter(
-      categories.filter((cus) =>
+    if(category.length > 0){
+      setInputSearchCategory(category);
+      
+      setCategoriesFilter(
+        categoriesAll.filter((cus) =>
         cus.nombre.toLowerCase().includes(category.toLowerCase())
-      )
-    );
+        )
+        );
+      }else{
+        setInputSearchCategory('');
+        setCategoriesFilter([])
+    }
   };
 
   return (
-    <div className="users">
+    <div className="category">
       <h3>Categorias</h3>
-      <SearchInput setShow={setShow} filterSomething={filtercategories} />
-      {categoriesFilter.length > 0 ? (
+      <SearchInput setShow={setShow} filterSomething={filtercategories} placeHolder='pastas..' />
+      {categoriesFilter.length > 0 || inputSearchCategory.length > 0? (
         <CategoryTable
           categories={categoriesFilter}
           pageInfo={pageInfo}
@@ -126,7 +131,15 @@ const CategoryCrud = () => {
         />
       ) : (
         <>
-          {inputSearchCategory.length > 0 ? (
+         <CategoryTable
+              categories={categories}
+              pageInfo={pageInfo}
+              getCategories={getCategories}
+              setCategoryToEdit={setCategoryToEdit}
+               setShow={setShow}
+              deleteCategory={deleteCategory}
+            />
+          {/* {inputSearchCategory.length > 0 ? (
             <CategoryTable
               categories={{}}
               pageInfo={pageInfo}
@@ -144,7 +157,7 @@ const CategoryCrud = () => {
                setShow={setShow}
               deleteCategory={deleteCategory}
             />
-          )}
+          )} */}
         </>
       )}
         <CategoryModal

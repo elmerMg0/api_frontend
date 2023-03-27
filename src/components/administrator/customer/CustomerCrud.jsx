@@ -11,7 +11,6 @@ const UserCrud = () => {
   const [pageInfo, setPageInfo] = useState({});
   const [show, setShow] = useState(false);
   const [showModalConfirm, setShowModalConfirm] = useState(false);
-  const [pageNumber, setPageNumber] = useState(1);
   const [customerToEdit, setCustomerToEdit] = useState({});
   const [customerToDelete, setCustomerToDelete] = useState({});
   const [customersAll, setCustomersAll] = useState([]);
@@ -81,19 +80,25 @@ const UserCrud = () => {
   };
 
   const filterCustomers = (customer) => {
-    setInputSearchCustomer(customer);
-    setCustomersFilter(
-      customers.filter((cus) =>
+    if(customer.length > 0){
+      setInputSearchCustomer(customer);
+      
+      setCustomersFilter(
+        customersAll.filter((cus) =>
         cus.nombre.toLowerCase().includes(customer.toLowerCase())
-      )
-    );
+        )
+        );
+      }else{
+        setInputSearchCustomer('');
+        setCustomersFilter([])
+    }
   };
 
   return (
-    <div className="users">
+    <div className="customers">
       <h3>Clientes</h3>
-      <SearchInput setShow={setShow} filterSomething={filterCustomers} />
-      {customersFilter.length > 0 ? (
+      <SearchInput setShow={setShow} filterSomething={filterCustomers} placeHolder='Juan Ramon' />
+      {customersFilter.length > 0 || inputSearchCustomer.length > 0? (
         <CustomerTable
           customers={customersFilter}
           pageInfo={pageInfo}
@@ -104,9 +109,17 @@ const UserCrud = () => {
         />
       ) : (
         <>
-          {inputSearchCustomer.length > 0 ? (
+          <CustomerTable
+              customers={customers}
+              pageInfo={pageInfo}
+              getCustomers={getCustomers}
+              setCustomerToEdit={setCustomerToEdit}
+              setShow={setShow}
+              deleteCustomer={deleteCustomer}
+            />
+          {/* {inputSearchCustomer.length > 0 ? (
             <CustomerTable
-              customers={{}}
+              customers={[]}
               pageInfo={pageInfo}
               getCustomers={getCustomers}
               setCustomerToEdit={setCustomerToEdit}
@@ -122,7 +135,7 @@ const UserCrud = () => {
               setShow={setShow}
               deleteCustomer={deleteCustomer}
             />
-          )}
+          )} */}
         </>
       )}
 

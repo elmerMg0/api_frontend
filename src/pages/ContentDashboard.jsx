@@ -1,19 +1,23 @@
 import CustomerCrud from '../components/administrator/customer/CustomerCrud'
 import CategoryCrud from '../components/administrator/category/CategoryCrud'
 import { useSelector } from 'react-redux'
+import ProductCrud from '../components/administrator/product/ProductCrud'
 const ContentDashboard = () => {
     //aqui todos los componente customers, users, products, etc
  
-  const view2 = useSelector(store => store.dashboard )
+  const view = useSelector(store => store.dashboard )
 
   return (
     <>
       {
-        view2 === 'customer' && <CustomerCrud/>
+        view === 'customer' && <CustomerCrud/>
       }
       {
-        view2 === 'category' && <CategoryCrud/>
-      }  
+        view === 'category' && <CategoryCrud/>
+      }
+       {
+        view === 'product' && <ProductCrud/>
+      }    
     </>
   )
 }
