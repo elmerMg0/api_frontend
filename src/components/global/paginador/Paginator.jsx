@@ -1,23 +1,23 @@
 import React from "react";
 
-const Paginator = ({ pageInfo, getCustomers }) => {
-  let { page, count, next, previus, start, totalPages } = pageInfo;
+const Paginator = ({ page, getItems }) => {
+  let { currentPage, totalCount, nextPage, previousPage, start, totalPages } = page;
+  
+  const handlePrevius = () => getItems(previousPage);
 
-  const handlePrevius = () => getCustomers(previus);
-
-  const handleNext = () => getCustomers(next);
+  const handleNext = () => getItems(nextPage);
 
   return (
     <div className="paginator">
-      <p>Items por pagina {count}</p>
-      <h5>{`${start + 1}-${start + count} of ${page}`}</h5>
-      {page === 1 ? 
+      <p>Items por pagina {totalCount}</p>
+      <h5>{`${start + 1}-${start + totalCount} of ${currentPage}`}</h5>
+      {currentPage === 1 ? 
           <button disabled onClick={handlePrevius} className=" ">{`<`}</button>
           :
           <button onClick={handlePrevius} className=" ">{`<`}</button>
       }
       {
-        page === totalPages ? 
+        currentPage === totalPages ? 
         <button disabled onClick={handleNext} className=" ">{`>`}</button>
         :
         <button onClick={handleNext} className=" ">{`>`}</button>

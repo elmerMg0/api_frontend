@@ -5,7 +5,7 @@ import UserTableRow from "./UserTableRow";
 const UserTable = ({ customers, pageInfo, getCustomers, setCustomerToEdit, setShow}) => {
   return (
     <Table>
-      <thead className="head-table">
+      <thead>
         <tr>
           <th>Nombre</th>
           <th>Celular</th>
