@@ -46,3 +46,11 @@
    width: 200px;
    margin: 0 auto;
 }
+.checkbox-variety{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.checkbox-variety p{
+  margin: 0;
+}
