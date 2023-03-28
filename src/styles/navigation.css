@@ -18,6 +18,7 @@ a{
     width: 100%;
     height: 100vh;
 }
+
 .navigation__logo{
     background-color: var(--colorMainBlack);
     padding: 20px;
@@ -27,7 +28,7 @@ a{
     background-color: var(--colorSecundaryBlack);
     height: 100vh;
     overflow: hidden;
- 
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,7 +38,10 @@ a{
 .navigation__link{
     color: var(--colorWhite);
     text-decoration: none;
+}
 
+.navigation__link:hover{
+    color: white;
 }
 .navigation ul li img{
     color: colorWhite;
@@ -46,13 +50,33 @@ a{
 .navigation ul{
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 25px;
     padding: 0;
     margin: 20px 0px;
+    width: 100%;
 }
 
 .navigation ul li{
+   /*  display: flex;
+    align-items: center;
+    gap: 8px; */
+    padding: 7px 0px;
+}
+
+.navigation ul li:hover{
+    background-color: var(--colorSecundary);
+}
+
+.bg-link{
+    background-color: var(--colorSecundary);
+}
+.navigation__content{
     display: flex;
     align-items: center;
     gap: 8px;
+    margin: 0px 25px;
+}
+.navigation__content button{
+    background-color: transparent;
+    border: none;
 }

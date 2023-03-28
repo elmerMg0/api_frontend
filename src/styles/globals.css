@@ -4,7 +4,11 @@
     --colorSecundary: #2D3C42;
     --colorSecundaryBlack: #222D30;
     --colorRed: #DA4E3B;
+<<<<<<< HEAD
     --colorRedSecond: #d36556;
+=======
+    --colorRedBlack: #e4412b;
+>>>>>>> origin/elmer
     --colorWhite: #ffffff;
 }
 
@@ -18,10 +22,21 @@
     border: none;
     transition: 0.5s;
 }
+
+.btn-main-red {
+    color: var(--colorWhite);
+    background-color: var(--colorRed);
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: 0.5s;
+}
 .btn-main:hover{
     color: var(--colorWhite);
     background-color: var(--colorMainBlack);
 }
+<<<<<<< HEAD
 .btn-danger {
     color: var(--colorWhite);
     background-color: var(--colorRed);
@@ -34,4 +49,10 @@
 .btn-danger:hover{
     color: var(--colorWhite);
     background-color: var(--colorRedSecond);
+=======
+
+.btn-main-red:hover{
+    color: var(--colorWhite);
+    background-color: var(--colorRedBlack);
+>>>>>>> origin/elmer
 }

@@ -1,10 +1,9 @@
 const APIURL = process.env.REACT_APP_API_URL;
 
 export const APISERVICE = {
-    get: async (pageNumber=1,campo) => {
-       
+    get: async (url, params='') => {
         try{
-            const response = await fetch(`${APIURL+campo}/?page=${pageNumber}`)
+            const response = await fetch(`${APIURL}${url}${params}`)
             const data = await response.json()
             data.status = response.status; 
             return data;
@@ -12,9 +11,9 @@ export const APISERVICE = {
             console.log(error)
         }
     },
-    post: async ( body, params) => {
+    post: async ( body,url, params='') => {
         try{
-            const response = await fetch(`${APIURL}${params}`,{
+            const response = await fetch(`${APIURL}${url}${params}`,{
                 method:'POST',
                 headers: {
                     'content-type':'application/json'
@@ -28,26 +27,26 @@ export const APISERVICE = {
             console.log(error)
         }
     },
-    delete: async(id,params) =>{
+    postWithImage: async ( body,url, params='') => {
         try{
-            const response = await fetch(`${APIURL}${params}${id}`,{
-                method:'DELETE',
+            const response = await fetch(`${APIURL}${url}${params}`,{
+                method:'POST',
+              /*   headers: {
+                    'content-type':'application/json'
+                }, */
+                body: body
             })
             const data = await response.json()
-            data.status=response.status
-            return data
+            data.status = response.status; 
+            return data;
         }catch(error){
             console.log(error)
         }
     },
-    update:async(body,params,id)=>{
+    delete: async ( url, params) => {
         try{
-            const response = await fetch(`${APIURL}${params}${id}`,{
-                method:'PUT',
-                headers: {
-                    'content-type':'application/json'
-                },
-                body: JSON.stringify(body)
+            const response = await fetch(`${APIURL}${url}${params}`,{
+                method:'DELETE',
             })
             const data = await response.json()
             data.status = response.status; 

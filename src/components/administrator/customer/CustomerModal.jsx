@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { Modal} from "react-bootstrap";
-import { Form, InputGroup, ModalTitle, Button } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 
 const initialState = {
   nombre:'',
@@ -9,19 +9,29 @@ const initialState = {
   descripcion_domicilio:''
 }
 
-const UserModal = ({ show, setShow, create, customerToEdit}) => {
+const UserModal = ({ show, setShow, create, customerToEdit, setCustomerToEdit ,updateCustomer}) => {
 
   const [customer, setCustomer] = useState(initialState)
 
 
   useEffect ( ( ) => {
-    customerToEdit ? setCustomer(customerToEdit) : setCustomer(initialState)
+    if(Object.keys(customerToEdit).length !== 0){
+      setCustomer(customerToEdit) 
+    }else{
+      setCustomer(initialState)
+    }
     console.log(customer)
   },[show])
 
   const handleConfirm = () => {
     setShow(false);
-    create(customer);
+    if( !customer.id ){
+      create(customer);
+    }else{
+      updateCustomer(customer);
+    }
+    //create(customer);
+    setCustomerToEdit({})
   }
   const handleOnChange = (e) => {
     setCustomer({
@@ -30,8 +40,13 @@ const UserModal = ({ show, setShow, create, customerToEdit}) => {
     })
   }
 
+  const handleCancel = () => {
+    setShow(false)
+    setCustomerToEdit({})
+  }
+
   return (
-    <Modal show={show} size="md" centered>
+    <Modal show={show} size="md" centered backdrop>
       <Modal.Header>
         <Modal.Title>
           <h3>Crear Nuevo Cliente</h3>
@@ -46,6 +61,7 @@ const UserModal = ({ show, setShow, create, customerToEdit}) => {
             onChange={handleOnChange}
             name='nombre'
             value={customer.nombre}
+            required
           />
         </InputGroup>
         <InputGroup className="mb-3">
@@ -81,7 +97,7 @@ const UserModal = ({ show, setShow, create, customerToEdit}) => {
 
       </Modal.Body>
       <Modal.Footer >
-        <button variant='danger' onClick={()=> setShow(false)}>Cancelar</button>
+        <button onClick={()=> handleCancel()} className='btn-main-red'>Cancelar</button>
         <button onClick={handleConfirm} className="btn-main">Confirmar</button>
       </Modal.Footer>
     </Modal>

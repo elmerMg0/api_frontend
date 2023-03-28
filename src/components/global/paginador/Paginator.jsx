@@ -1,11 +1,20 @@
 import React from "react";
 
+<<<<<<< HEAD
 const Paginator = ({ page, getItems }) => {
   let { currentPage, totalCount, nextPage, previousPage, start, totalPages } = page;
   
   const handlePrevius = () => getItems(previousPage);
 
   const handleNext = () => getItems(nextPage);
+=======
+const Paginator = ({ pageInfo, getData }) => {
+  let { page, count, next, previus, start, totalPages } = pageInfo;
+
+  const handlePrevius = () => getData(previus);
+
+  const handleNext = () => getData(next);
+>>>>>>> origin/elmer
 
   return (
     <div className="paginator">
