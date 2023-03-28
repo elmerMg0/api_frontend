@@ -12,11 +12,7 @@ const UserTable = ({
 }) => {
   return (
     <Table>
-<<<<<<< HEAD
-      <thead>
-=======
       <thead className="head-table rounded-top">
->>>>>>> origin/elmer
         <tr>
           <th>Nombre</th>
           <th>Celular</th>

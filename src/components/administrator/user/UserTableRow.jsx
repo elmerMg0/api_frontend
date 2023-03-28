@@ -9,11 +9,10 @@ export default function UserTableRow({res,deleteUser,updateuser,createuser}) {
   
     <>
       <tr>
-        <td className='col-2'>{res.nombres}</td>
+        <td className='col-4'>{res.nombres}</td>
         <td className='col-2'>{res.tipo}</td>
         <td className='col-2'>image</td>
-        <td className='col-3'>
-          <Button>Ver</Button>{" "}
+        <td className='col-2'>
           <Button onClick={() => setModalShow(true)}>Editar</Button>{" "}
           <button onClick={() => deleteUser(res.id)} className='btn-danger'>Eliminar</button>
         </td>

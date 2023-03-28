@@ -4,14 +4,14 @@ import Paginator from '../../global/paginador/Paginator';
 import ModalCreateUser from './ModalCreateUser';
 import UserTableRow from './UserTableRow'
 
-export default function UserTable({getUsers,  users, page, updateuser, deleteUser,createuser}) {
+export default function UserTable({getUsers,  users, pageInfo, updateuser, deleteUser,createuser}) {
 
   
   return (
     <>
       <div >
         <Table>
-          <thead>
+          <thead className='head-table'>
             <tr>
               <th>Nombre</th>
               <th>Tipo</th>
@@ -42,7 +42,7 @@ export default function UserTable({getUsers,  users, page, updateuser, deleteUse
             }
             <tr>
               <td colSpan={5}>
-                <Paginator page={page} getItems={getUsers} />
+                <Paginator pageInfo={pageInfo} getData={getUsers} />
               </td>
             </tr>
           </tbody>

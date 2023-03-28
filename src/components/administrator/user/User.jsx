@@ -2,22 +2,30 @@ import React, { useState,useEffect } from 'react'
 import { APISERVICE } from "../../../services/api.services";
 import ModalCreateUser from './ModalCreateUser';
 import UserTable from './UserTable'
+import ModalConfirm from "../../global/modal/ModalConfirm";
+import { Toaster, toast} from "react-hot-toast";
 
 export default function User() {
 
   const[users, setUsers]= useState([])
-  const[page, setPage]=useState(1)
+  const[pageInfo, setPageInfo]=useState(1)
   const [modalShow, setModalShow] = useState(false);
+  const [showModalConfirm, setShowModalConfirm] = useState(false);
+  const [customerToDelete, setCustomerToDelete] = useState({});
   let res = ""
 
+  const messageToast = ( message ) =>{
+    toast.success(message)
+  }
   
-  
-  const getUsers = async (page) => {
-    const response = await APISERVICE.get(page,"usuario");
+  const getUsers = async (pageNumber=1) => {
+    let url = "usuario/?";
+    let params = `page=${pageNumber}`;
+    const response = await APISERVICE.get(url,params);
     if (response.status === 200) {
-      setUsers(response.data);
-      setPage(response.pagination);
-      console.log(response.data)
+      setUsers(response.pageInfo.users);
+      setPageInfo(response.pageInfo);
+      console.log(response.pageInfo.users)
     }
   };
   const createuser = async (body)=>{
@@ -28,14 +36,22 @@ export default function User() {
     }
     console.log(response)
   }
-  const deleteUser = async (id) =>{
-    let params = "usuario/delete-user?id="
-    const response = await APISERVICE.delete(id,params)
-    if(response.status === 200){
+
+  const deleteUserModal= async (id) => {
+    setShowModalConfirm(true);
+    setCustomerToDelete(id);
+  };
+
+  const deleteUser = async () => {
+    let url = "usuario/delete-user?";
+    let params = `id=${customerToDelete}`
+    const response = await APISERVICE.delete(url, params);
+    if (response.status === 200) {
       getUsers();
+      messageToast('Usuario eliminado con exito!')
     }
-    console.log(response)
-  }
+    setShowModalConfirm(false);
+  };
   const updateuser = async (body,id)=>{
     let params = "usuario/edit-user?id="
     const response = await APISERVICE.update(body,params,id)
@@ -56,10 +72,10 @@ export default function User() {
     <UserTable 
           getUsers={getUsers}
           users={users}
-          page={page}
+          pageInfo={pageInfo}
           updateuser={updateuser}
           createuser={createuser}
-          deleteUser={deleteUser}
+          deleteUser={deleteUserModal}
         />
     </div>
        
@@ -74,7 +90,15 @@ export default function User() {
                    
             
           />
-        
+        <ModalConfirm
+          show={showModalConfirm}
+          onHide={setShowModalConfirm}
+          deleteCustomer={deleteUser}
+        />
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+        />
         
         
       </div>
