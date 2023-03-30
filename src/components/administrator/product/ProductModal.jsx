@@ -39,7 +39,8 @@ const ProductModal = ({
   const handleConfirm = () => {
     setShow(false);
     if (!product.id) {
-      create(product, selectedImage);
+      console.log(varieties)
+      create(product, selectedImage, varieties);
     } else {
       updateProduct(product, selectedImage);
     }
@@ -84,15 +85,17 @@ const ProductModal = ({
     let array = new Array(amount);
     let i;
     for (i = 0; i < amount; i++) {
-      array[i] = { id: i, variedad: "" };
+      array[i] = [`variedad${i}`, ''] ;
     }
     setVarieties(array);
-    console.log(varieties);
+    console.log(array)
   };
 
   const handleOnChangeVariety = (e, id) => {
-     setVarieties([...varieties, varieties[id] = 'jiji'  ])
-     console.log(varieties)
+    const object = Object.fromEntries(varieties);
+     const object2 = ({...object, [id]: e.target.value})
+    setVarieties(Object.entries(object2))
+    console.log(varieties)
   }
 
   return (
@@ -194,6 +197,7 @@ const ProductModal = ({
               Cantidad de variedad:
               <input
                 type="number"
+                min={0}
                 onChange={(e) => setAmount(e.target.value)}
               />
               <button onClick={() => createListVariety()}>Aceptar</button>
@@ -202,11 +206,11 @@ const ProductModal = ({
         </Collapse>
         {open &&
           varieties.length > 0 &&
-          varieties.map((a) => {
+          varieties.map((a, index) => {
             return (
-              <label>
-                {`variedad ${a.id + 1}:`}
-                <input key={a.id} type="text" name={a.id} onChange={(e) => handleOnChangeVariety(e,a.id)} />
+              <label key={index}>
+                {"variedad "+index+":"}
+                <input type="text" name={a[0]} onChange={(e) => handleOnChangeVariety(e,a[0])} />
               </label>
             );
           })}
