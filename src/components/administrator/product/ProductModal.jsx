@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
-import { Form, InputGroup } from "react-bootstrap";
+import { Form, InputGroup, Collapse } from "react-bootstrap";
 
 const initialState = {
   nombre: "",
@@ -8,8 +8,8 @@ const initialState = {
   precio_compra: "",
   descripcion: "",
   estaod: 1,
-  categoria:'',
-  url_image: ''
+  categoria: "",
+  url_image: "",
 };
 
 const ProductModal = ({
@@ -23,7 +23,9 @@ const ProductModal = ({
 }) => {
   const [product, setProduct] = useState(initialState);
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const [open, setOpen] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [varieties, setVarieties] = useState([]);
   useEffect(() => {
     console.log(productToEdit);
     if (productToEdit && Object.keys(productToEdit).length !== 0) {
@@ -78,11 +80,26 @@ const ProductModal = ({
     }
   };
 
+  const createListVariety = () => {
+    let array = new Array(amount);
+    let i;
+    for (i = 0; i < amount; i++) {
+      array[i] = { id: i, variedad: "" };
+    }
+    setVarieties(array);
+    console.log(varieties);
+  };
+
+  const handleOnChangeVariety = (e, id) => {
+     setVarieties([...varieties, varieties[id] = 'jiji'  ])
+     console.log(varieties)
+  }
+
   return (
     <Modal show={show} size="md" centered backdrop>
       <Modal.Header>
         <Modal.Title>
-          <h3>Crear nueva categoria</h3>
+          <h3>Crear nuevo producto</h3>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -127,14 +144,16 @@ const ProductModal = ({
             value={product.descripcion}
           />
         </InputGroup>
-  
+
         <InputGroup className="mb-3">
           <InputGroup.Text>Categoria</InputGroup.Text>
           <Form.Select>
             <option>Selecione una categoria</option>
-            {
-              categories.map(cat => <option key={cat.id} value={cat.id}>{cat.nombre}</option>)
-            }
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.nombre}
+              </option>
+            ))}
           </Form.Select>
         </InputGroup>
 
@@ -158,16 +177,40 @@ const ProductModal = ({
               <div className="modal-product-image">
                 <img
                   src={`http://localhost:8080/upload/${product.url_image}`}
-                  alt="a"
+                  alt="foto producto"
                 />
               </div>
             )}
           </>
         )}
-        {/*   {selectedImage && (
-            
-          )}
- */}
+        <div className="checkbox-variety">
+          <input onClick={() => setOpen(!open)} type="checkbox" />
+          <p>Incluir varidad al producto</p>
+        </div>
+
+        <Collapse in={open}>
+          <div>
+            <label>
+              Cantidad de variedad:
+              <input
+                type="number"
+                onChange={(e) => setAmount(e.target.value)}
+              />
+              <button onClick={() => createListVariety()}>Aceptar</button>
+            </label>
+          </div>
+        </Collapse>
+        {open &&
+          varieties.length > 0 &&
+          varieties.map((a) => {
+            return (
+              <label>
+                {`variedad ${a.id + 1}:`}
+                <input key={a.id} type="text" name={a.id} onChange={(e) => handleOnChangeVariety(e,a.id)} />
+              </label>
+            );
+          })}
+        <div></div>
       </Modal.Body>
       <Modal.Footer>
         <button onClick={() => handleCancel()} className="btn-main-red">
