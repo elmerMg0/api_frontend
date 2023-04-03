@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { Form, InputGroup, Collapse } from "react-bootstrap";
+import { APISERVICE } from "../../../services/api.services";
 
 const initialState = {
   nombre: "",
   precio_venta: "",
   precio_compra: "",
   descripcion: "",
-  estaod: 1,
+  estado: 1,
   categoria: "",
   url_image: "",
 };
@@ -27,14 +28,24 @@ const ProductModal = ({
   const [amount, setAmount] = useState(0);
   const [varieties, setVarieties] = useState([]);
   useEffect(() => {
-    console.log(productToEdit);
     if (productToEdit && Object.keys(productToEdit).length !== 0) {
       setProduct(productToEdit);
     } else {
       setProduct(initialState);
     }
-    console.log(product);
+    getVarieties()
   }, [show]);
+
+  const getVarieties = () => {
+     if( product.id ) {
+      let url = 'producto/varieties/?'
+      let params = `idProduct=${product.id}`
+
+      let response = APISERVICE.get(url, params)
+        //obtener variedades y cargarlas en el collapse 
+        //collapse = true;
+    }  
+  }
 
   const handleConfirm = () => {
     setShow(false);
@@ -42,11 +53,14 @@ const ProductModal = ({
       console.log(varieties)
       create(product, selectedImage, varieties);
     } else {
-      updateProduct(product, selectedImage);
+      updateProduct(product, selectedImage, varieties);
     }
     //create(product);
     setProductToEdit({});
     setSelectedImage(null);
+    setVarieties([])
+    setOpen(false);
+
   };
   const handleOnChange = (e) => {
     setProduct({
@@ -55,16 +69,18 @@ const ProductModal = ({
     });
   };
 
-  const handleFileChange = (e) => {
+/*   const handleFileChange = (e) => {
     setProduct({
       ...product,
       [e.target.name]: e.target.files[0],
     });
-  };
+  }; */
 
   const handleCancel = () => {
     setShow(false);
     setProductToEdit({});
+    setVarieties([])
+    setOpen(false);
   };
 
   const handleImageChange = (event) => {
@@ -95,7 +111,6 @@ const ProductModal = ({
     const object = Object.fromEntries(varieties);
      const object2 = ({...object, [id]: e.target.value})
     setVarieties(Object.entries(object2))
-    console.log(varieties)
   }
 
   return (
@@ -150,7 +165,7 @@ const ProductModal = ({
 
         <InputGroup className="mb-3">
           <InputGroup.Text>Categoria</InputGroup.Text>
-          <Form.Select>
+          <Form.Select name='categoria' onChange={handleOnChange}>
             <option>Selecione una categoria</option>
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
@@ -193,11 +208,11 @@ const ProductModal = ({
 
         <Collapse in={open}>
           <div>
-            <label>
+            <label className="variety">
               Cantidad de variedad:
               <input
                 type="number"
-                min={0}
+                min={1}
                 onChange={(e) => setAmount(e.target.value)}
               />
               <button onClick={() => createListVariety()}>Aceptar</button>
@@ -208,10 +223,16 @@ const ProductModal = ({
           varieties.length > 0 &&
           varieties.map((a, index) => {
             return (
-              <label key={index}>
-                {"variedad "+index+":"}
-                <input type="text" name={a[0]} onChange={(e) => handleOnChangeVariety(e,a[0])} />
-              </label>
+              <InputGroup key={index} className="mb-3">
+              <InputGroup.Text>{"variedad "+index+":"}</InputGroup.Text>
+              <Form.Control
+                type="text"
+                onChange={(e) => handleOnChangeVariety(e,a[0])} 
+                name={a[0]}
+                required
+              />
+            </InputGroup>
+      
             );
           })}
         <div></div>

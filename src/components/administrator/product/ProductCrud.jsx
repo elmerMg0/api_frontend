@@ -51,23 +51,31 @@ const CategoryCrud = () => {
     }
   };
 
-  const createNewProduct = async (product, image) => {
+  const createNewProduct = async (product, image, varieties) => {
     //envio de info en body
-    let url = "producto/create";
+    let url = "producto/create/?";
     const formData = new FormData();
     let data = {
       nombre: product.nombre,
       descripcion: product.descripcion,
+      precio_venta: product.precio_venta,
+      precio_compra: product.precio_compra,
+      estado: product.estado,
+      categoria_id: product.categoria,
+      tipo: 'comida',
     };
     formData.append("data", JSON.stringify(data));
     if (image) formData.append("file", product.url_image);
+    if (varieties.length > 0) formData.append("varieties", JSON.stringify(varieties));
 
-    const response = await APISERVICE.postWithImage(formData, url);
+    let params = `idCategory=${product.categoria}`
+    const response = await APISERVICE.postWithImage(formData, url, params);
     if (response.status === 201) {
       messageToast("producto agregado exitosamente!");
     }
     //envio de imagen producto
     getProducts();
+    console.log(response)
   };
 
   const messageToast = (message) => {
@@ -146,7 +154,7 @@ const CategoryCrud = () => {
           <ProductTable
             products={products}
             pageInfo={pageInfo}
-            getProducts={getProducts}
+            getProducts={getProducts} 
             setProductToEdit={setProductToEdit}
             setShow={setShow}
             deleteProduct={deleteProduct}
@@ -159,7 +167,7 @@ const CategoryCrud = () => {
         create={createNewProduct}
         productToEdit={productToEdit}
         setProductToEdit={setProductToEdit}
-        updateCategory={updateProduct}
+        updateProduct={updateProduct}
         categories={categories}
       />
       {/*  <ModalConfirmCategory

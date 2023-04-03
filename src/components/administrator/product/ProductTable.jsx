@@ -13,7 +13,12 @@ const ProductTable = ({
     <div className="container-products">
       {products && products.length > 0 ? (
         products.map((prod) => (
-          <ProductTableCard key={prod.id} product={prod} />
+          <ProductTableCard
+            key={prod.id}
+            product={prod}
+            setProductToEdit={setProductToEdit}
+            setShow={setShow}
+          />
         ))
       ) : (
         <h3>No existem productos aun</h3>
