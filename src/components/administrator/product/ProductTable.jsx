@@ -8,6 +8,7 @@ const ProductTable = ({
   setProductToEdit,
   setShow,
   deleteProduct,
+  getVarieties,
 }) => {
   return (
     <div className="container-products">
@@ -18,6 +19,7 @@ const ProductTable = ({
             product={prod}
             setProductToEdit={setProductToEdit}
             setShow={setShow}
+            getVarieties={getVarieties}
           />
         ))
       ) : (

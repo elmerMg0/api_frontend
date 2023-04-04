@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
-import { Form, InputGroup, Collapse } from "react-bootstrap";
-import { APISERVICE } from "../../../services/api.services";
+import { Form, InputGroup } from "react-bootstrap";
 
 const initialState = {
   nombre: "",
@@ -21,11 +20,14 @@ const ProductModal = ({
   setProductToEdit,
   updateProduct,
   categories,
+  varietiesProduct,
+  setVarietiesProduct,
+  deleteProduct,
 }) => {
   const [product, setProduct] = useState(initialState);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [open, setOpen] = useState(false);
-  const [amount, setAmount] = useState(0);
+  //const [open, setOpen] = useState(false);
+  //const [amount, setAmount] = useState(0);
   const [varieties, setVarieties] = useState([]);
   useEffect(() => {
     if (productToEdit && Object.keys(productToEdit).length !== 0) {
@@ -33,24 +35,17 @@ const ProductModal = ({
     } else {
       setProduct(initialState);
     }
-    getVarieties()
+    /*  console.log(varietiesProduct);
+    if (varietiesProduct.length > 0) {
+      setVarieties(varietiesProduct);
+      setOpen(true);
+    } */
   }, [show]);
-
-  const getVarieties = () => {
-     if( product.id ) {
-      let url = 'producto/varieties/?'
-      let params = `idProduct=${product.id}`
-
-      let response = APISERVICE.get(url, params)
-        //obtener variedades y cargarlas en el collapse 
-        //collapse = true;
-    }  
-  }
 
   const handleConfirm = () => {
     setShow(false);
     if (!product.id) {
-      console.log(varieties)
+      console.log(varieties);
       create(product, selectedImage, varieties);
     } else {
       updateProduct(product, selectedImage, varieties);
@@ -58,9 +53,9 @@ const ProductModal = ({
     //create(product);
     setProductToEdit({});
     setSelectedImage(null);
-    setVarieties([])
-    setOpen(false);
-
+    setVarieties([]);
+    //setOpen(false);
+    setVarietiesProduct([]);
   };
   const handleOnChange = (e) => {
     setProduct({
@@ -69,7 +64,7 @@ const ProductModal = ({
     });
   };
 
-/*   const handleFileChange = (e) => {
+  /*   const handleFileChange = (e) => {
     setProduct({
       ...product,
       [e.target.name]: e.target.files[0],
@@ -79,8 +74,9 @@ const ProductModal = ({
   const handleCancel = () => {
     setShow(false);
     setProductToEdit({});
-    setVarieties([])
-    setOpen(false);
+    setVarieties([]);
+    //setOpen(false);
+    setVarietiesProduct([]);
   };
 
   const handleImageChange = (event) => {
@@ -97,21 +93,26 @@ const ProductModal = ({
     }
   };
 
-  const createListVariety = () => {
+  /*   const createListVariety = () => {
     let array = new Array(amount);
     let i;
     for (i = 0; i < amount; i++) {
-      array[i] = [`variedad${i}`, ''] ;
+      array[i] = [`variedad${i}`, ""];
     }
     setVarieties(array);
-    console.log(array)
-  };
+    console.log(array);
+  }; */
 
-  const handleOnChangeVariety = (e, id) => {
+  /*   const handleOnChangeVariety = (e, id) => {
     const object = Object.fromEntries(varieties);
-     const object2 = ({...object, [id]: e.target.value})
-    setVarieties(Object.entries(object2))
-  }
+    const object2 = { ...object, [id]: e.target.value };
+    setVarieties(Object.entries(object2));
+  }; */
+
+  const handleDeleteProduct = () => {
+    deleteProduct(product.id);
+    setShow(false);
+  };
 
   return (
     <Modal show={show} size="md" centered backdrop>
@@ -165,7 +166,7 @@ const ProductModal = ({
 
         <InputGroup className="mb-3">
           <InputGroup.Text>Categoria</InputGroup.Text>
-          <Form.Select name='categoria' onChange={handleOnChange}>
+          <Form.Select name="categoria" onChange={handleOnChange}>
             <option>Selecione una categoria</option>
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
@@ -201,12 +202,16 @@ const ProductModal = ({
             )}
           </>
         )}
-        <div className="checkbox-variety">
-          <input onClick={() => setOpen(!open)} type="checkbox" />
+        {/*    <div className="checkbox-variety">
+          {open ? (
+            <input onClick={() => setOpen(!open)} type="checkbox" checked='true'/>
+          ) : (
+            <input onClick={() => setOpen(!open)} type="checkbox" />
+          )}
           <p>Incluir varidad al producto</p>
-        </div>
+        </div> */}
 
-        <Collapse in={open}>
+        {/*  <Collapse in={open}>
           <div>
             <label className="variety">
               Cantidad de variedad:
@@ -224,24 +229,32 @@ const ProductModal = ({
           varieties.map((a, index) => {
             return (
               <InputGroup key={index} className="mb-3">
-              <InputGroup.Text>{"variedad "+index+":"}</InputGroup.Text>
-              <Form.Control
-                type="text"
-                onChange={(e) => handleOnChangeVariety(e,a[0])} 
-                name={a[0]}
-                required
-              />
-            </InputGroup>
-      
+                <InputGroup.Text>{"variedad " + index + ":"}</InputGroup.Text>
+                <Form.Control
+                  type="text"
+                  onChange={(e) => handleOnChangeVariety(e, a[0])}
+                  name={a[0]}
+                  required
+                  value={a[1]}
+                />
+              </InputGroup>
             );
-          })}
+          })} */}
         <div></div>
       </Modal.Body>
       <Modal.Footer>
-        <button onClick={() => handleCancel()} className="btn-main-red">
+        {product.id && (
+          <button
+            className="btn-main-red"
+            onClick={() => handleDeleteProduct()}
+          >
+            Eliminar
+          </button>
+        )}
+        <button onClick={() => handleCancel()} className="btn-main">
           Cancelar
         </button>
-        <button onClick={handleConfirm} className="btn-main">
+        <button onClick={handleConfirm} className="btn-main-green">
           Confirmar
         </button>
       </Modal.Footer>

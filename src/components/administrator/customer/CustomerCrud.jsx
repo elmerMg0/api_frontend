@@ -3,7 +3,7 @@ import CustomerTable from "./CustomerTable";
 import { APISERVICE } from "../../../services/api.services";
 import CustomerModal from "./CustomerModal";
 import ModalConfirm from "../../global/modal/ModalConfirm";
-import { Toaster, toast} from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import SearchInput from "../../global/search/SearchInput";
 
 const UserCrud = () => {
@@ -44,21 +44,21 @@ const UserCrud = () => {
     let url = "cliente/create";
     const response = await APISERVICE.post(customer, url);
     if (response.status === 201) {
-      messageToast('Cliente agregado exitosamente!')
+      messageToast("Cliente agregado exitosamente!");
     }
     getCustomers();
   };
 
-  const messageToast = ( message ) =>{
-    toast.success(message)
-  }
+  const messageToast = (message) => {
+    toast.success(message);
+  };
 
   const updateCustomer = async (customer) => {
     let $url = `cliente/update?`;
     let $params = `idCustomer=${customer.id}`;
     const response = await APISERVICE.post(customer, $url, $params);
     if (response.status === 200) {
-      messageToast('Cliente Actualizado con exito!')
+      messageToast("Cliente Actualizado con exito!");
       getCustomers();
     }
   };
@@ -70,35 +70,39 @@ const UserCrud = () => {
 
   const deleteCustomerToServer = async () => {
     let url = "cliente/delete?";
-    let params = `idCustomer=${customerToDelete}`
+    let params = `idCustomer=${customerToDelete}`;
     const response = await APISERVICE.delete(url, params);
     if (response.status === 200) {
       getCustomers();
-      messageToast('Cliente eliminado con exito!')
+      messageToast("Cliente eliminado con exito!");
     }
     setShowModalConfirm(false);
   };
 
   const filterCustomers = (customer) => {
-    if(customer.length > 0){
+    if (customer.length > 0) {
       setInputSearchCustomer(customer);
-      
+
       setCustomersFilter(
         customersAll.filter((cus) =>
-        cus.nombre.toLowerCase().includes(customer.toLowerCase())
+          cus.nombre.toLowerCase().includes(customer.toLowerCase())
         )
-        );
-      }else{
-        setInputSearchCustomer('');
-        setCustomersFilter([])
+      );
+    } else {
+      setInputSearchCustomer("");
+      setCustomersFilter([]);
     }
   };
 
   return (
     <div className="customers">
       <h3>Clientes</h3>
-      <SearchInput setShow={setShow} filterSomething={filterCustomers} placeHolder='Juan Ramon' />
-      {customersFilter.length > 0 || inputSearchCustomer.length > 0? (
+      <SearchInput
+        setShow={setShow}
+        filterSomething={filterCustomers}
+        placeHolder="Juan Ramon"
+      />
+      {customersFilter.length > 0 || inputSearchCustomer.length > 0 ? (
         <CustomerTable
           customers={customersFilter}
           pageInfo={pageInfo}
@@ -110,13 +114,13 @@ const UserCrud = () => {
       ) : (
         <>
           <CustomerTable
-              customers={customers}
-              pageInfo={pageInfo}
-              getCustomers={getCustomers}
-              setCustomerToEdit={setCustomerToEdit}
-              setShow={setShow}
-              deleteCustomer={deleteCustomer}
-            />
+            customers={customers}
+            pageInfo={pageInfo}
+            getCustomers={getCustomers}
+            setCustomerToEdit={setCustomerToEdit}
+            setShow={setShow}
+            deleteCustomer={deleteCustomer}
+          />
           {/* {inputSearchCustomer.length > 0 ? (
             <CustomerTable
               customers={[]}
@@ -150,12 +154,9 @@ const UserCrud = () => {
       <ModalConfirm
         show={showModalConfirm}
         onHide={setShowModalConfirm}
-        deleteCustomer={deleteCustomerToServer}
+        deleteSomething={deleteCustomerToServer}
       />
-        <Toaster
-      position="top-right"
-      reverseOrder={false}
-     />
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 };

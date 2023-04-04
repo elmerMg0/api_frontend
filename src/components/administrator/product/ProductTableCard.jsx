@@ -1,11 +1,16 @@
 import React from "react";
 
-const ProductTableCard = ({ product, setProductToEdit, setShow}) => {
-
+const ProductTableCard = ({
+  product,
+  setProductToEdit,
+  setShow,
+  getVarieties,
+}) => {
   const handleShowMore = () => {
-    setProductToEdit(product)
-    setShow(true);
-  }
+    setProductToEdit(product);
+    getVarieties(product.id);
+    //setShow(true);
+  };
 
   return (
     <div className="product-card">
@@ -17,7 +22,9 @@ const ProductTableCard = ({ product, setProductToEdit, setShow}) => {
         <h5>{product.nombre}</h5>
         <h5>{product.descripcion}</h5>
         <h5>Bs.-{product.precio_venta}</h5>
-        <button className="btn-main" onClick={()=>handleShowMore()}>Ver mas</button>
+        <button className="btn-main" onClick={() => handleShowMore()}>
+          Editar
+        </button>
       </div>
     </div>
   );

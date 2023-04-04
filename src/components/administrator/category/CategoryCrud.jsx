@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import CategoryTable from "./CategoryTable";
 import { APISERVICE } from "../../../services/api.services";
 import CategoryModal from "./CategoryModal";
-import ModalConfirmCategory from "../../administrator/category/ModalConfirmCategory";
+import ModalConfirm from "../../global/modal/ModalConfirm";
 import { Toaster, toast} from "react-hot-toast";
 import categoryCrud from '../../../styles/categoryCrud.css'
 import SearchInput from "../../global/search/SearchInput";
@@ -168,10 +168,10 @@ const CategoryCrud = () => {
         setCategoryToEdit={setCategoryToEdit}
         updateCategory={updateCategory}
       />
-      <ModalConfirmCategory
+      <ModalConfirm
         show={showModalConfirm}
         onHide={setShowModalConfirm}
-        deleteCategory={deleteCategoryToServer}
+        deleteSomething={deleteCategoryToServer}
       />
         <Toaster
       position="top-right"

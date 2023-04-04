@@ -6,6 +6,7 @@
     --colorRed: #DA4E3B;
     --colorRedBlack: #e4412b;
     --colorWhite: #ffffff;
+    --colorGreen: #00A758;
 }
 
 
@@ -22,6 +23,15 @@
 .btn-main-red {
     color: var(--colorWhite);
     background-color: var(--colorRed);
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: 0.5s;
+}
+.btn-main-green {
+    color: var(--colorWhite);
+    background-color: var(--colorGreen);
     padding: 8px 15px;
     border-radius: 10px;
     cursor: pointer;

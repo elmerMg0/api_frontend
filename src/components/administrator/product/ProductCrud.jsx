@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductTable from "./ProductTable";
 import { APISERVICE } from "../../../services/api.services";
 import ProductModal from "./ProductModal";
-import ModalConfirmProduct from "../../administrator/category/ModalConfirmCategory";
+import ModalConfirm from "../../global/modal/ModalConfirm";
 import { Toaster, toast } from "react-hot-toast";
 import productCrud from "../../../styles/productCrud.css";
 import SearchInput from "../../global/search/SearchInput";
@@ -18,7 +18,7 @@ const CategoryCrud = () => {
   const [productsFilter, setProductsFilter] = useState([]);
   const [inputSearchProduct, setInputSearchProduct] = useState("");
   const [categories, setCategories] = useState([]);
-
+  const [varieties, setVarieties] = useState([]);
   useEffect(() => {
     getProducts();
     getProductsAll();
@@ -62,38 +62,45 @@ const CategoryCrud = () => {
       precio_compra: product.precio_compra,
       estado: product.estado,
       categoria_id: product.categoria,
-      tipo: 'comida',
+      tipo: "comida",
     };
     formData.append("data", JSON.stringify(data));
     if (image) formData.append("file", product.url_image);
-    if (varieties.length > 0) formData.append("varieties", JSON.stringify(varieties));
+    if (varieties.length > 0)
+      formData.append("varieties", JSON.stringify(varieties));
 
-    let params = `idCategory=${product.categoria}`
+    let params = `idCategory=${product.categoria}`;
     const response = await APISERVICE.postWithImage(formData, url, params);
     if (response.status === 201) {
       messageToast("producto agregado exitosamente!");
     }
     //envio de imagen producto
     getProducts();
-    console.log(response)
+    console.log(response);
   };
 
   const messageToast = (message) => {
     toast.success(message);
   };
 
-  const updateProduct = async (product, image) => {
+  const updateProduct = async (product, image, varieties) => {
     let $url = `producto/update?`;
     let $params = `idProduct=${product.id}`;
 
     const fd = new FormData();
 
-    let body = {
+    let data = {
       nombre: product.nombre,
       descripcion: product.descripcion,
+      precio_venta: product.precio_venta,
+      precio_compra: product.precio_compra,
+      estado: product.estado,
+      categoria_id: product.categoria,
+      tipo: "comida",
     };
-    fd.append("data", JSON.stringify(body));
+    fd.append("data", JSON.stringify(data));
     if (image) fd.append("file", product.url_image);
+    if (varieties.length > 0) fd.append("varieties", JSON.stringify(varieties));
     const response = await APISERVICE.postWithImage(fd, $url, $params);
     if (response.status === 200) {
       messageToast("producto Actualizado con exito!");
@@ -132,6 +139,24 @@ const CategoryCrud = () => {
     }
   };
 
+  const getVarieties = async (idProduct) => {
+    let url = "producto/varieties/?";
+    let params = `idProduct=${idProduct}`;
+
+    let response = await APISERVICE.get(url, params);
+
+    if (response.success === true) {
+      let array = new Array(response.varieties);
+      let varieties = response.varieties;
+      let i;
+      for (i = 0; i < varieties.length; i++) {
+        array[i] = [`variedad${i}`, varieties[i].nombre];
+      }
+      setVarieties(array);
+    }
+    setShow(true);
+  };
+
   return (
     <div className="product">
       <h3>productos</h3>
@@ -148,16 +173,18 @@ const CategoryCrud = () => {
           setProductToEdit={setProductToEdit}
           setShow={setShow}
           deleteProduct={deleteProduct}
+          getVarieties={getVarieties}
         />
       ) : (
         <>
           <ProductTable
             products={products}
             pageInfo={pageInfo}
-            getProducts={getProducts} 
+            getProducts={getProducts}
             setProductToEdit={setProductToEdit}
             setShow={setShow}
             deleteProduct={deleteProduct}
+            getVarieties={getVarieties}
           />
         </>
       )}
@@ -169,12 +196,15 @@ const CategoryCrud = () => {
         setProductToEdit={setProductToEdit}
         updateProduct={updateProduct}
         categories={categories}
+        varietiesProduct={varieties}
+        setVarietiesProduct={setVarieties}
+        deleteProduct={deleteProduct}
       />
-      {/*  <ModalConfirmCategory
+      <ModalConfirm
         show={showModalConfirm}
         onHide={setShowModalConfirm}
-        deleteProduct={deleteProductToServer}
-      /> */}
+        deleteSomething={deleteProductToServer}
+      />
       <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
