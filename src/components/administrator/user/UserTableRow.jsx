@@ -1,24 +1,34 @@
-import React,{useState} from 'react'
-import { Button } from 'react-bootstrap'
-import ModalCreateUser from './ModalCreateUser'
+import React, { useState } from "react";
+import edit from "../../../assets/svg/edit.svg";
+import trash from "../../../assets/svg/trash.svg";
 
-export default function UserTableRow({res,deleteUser,updateuser}) {
-
-  const [modalShow, setModalShow] = useState(false);
+export default function UserTableRow({
+  user,
+  deleteUser,
+  setUserUpdate,
+  setModalShow,
+}) {
   return (
-  
     <>
       <tr>
-        <td className='col-4'>{res.nombres}</td>
-        <td className='col-2'>{res.tipo}</td>
-        <td className='col-2'>image</td>
-        <td className='col-2'>
-          <Button onClick={() => setModalShow(true)}>Editar</Button>{" "}
-          <button onClick={() => deleteUser(res.id)} className='btn-danger'>Eliminar</button>
+        <td className="col-4">{user.nombres}</td>
+        <td className="col-2">{user.tipo}</td>
+        <td className="col-2">image</td>
+        <td className="col-2 text-center">
+          <button
+            className="btn-main"
+            onClick={() => {
+              setModalShow(true);
+              setUserUpdate(user);
+            }}
+          >
+            <img src={edit} alt="icon-edit" />{" "}
+          </button>{" "}
+          <button onClick={() => deleteUser(user.id)} className="btn-main-red">
+            <img src={trash} alt="icon-basura" />
+          </button>
         </td>
       </tr>
     </>
- 
-
-  )
+  );
 }

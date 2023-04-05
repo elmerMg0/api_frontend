@@ -4,6 +4,7 @@ import ModalCreateUser from "./ModalCreateUser";
 import UserTable from "./UserTable";
 import ModalConfirm from "../../global/modal/ModalConfirm";
 import { Toaster, toast } from "react-hot-toast";
+import SearchInput from "../../global/search/SearchInput";
 
 export default function User() {
   const [users, setUsers] = useState([]);
@@ -11,6 +12,7 @@ export default function User() {
   const [modalShow, setModalShow] = useState(false);
   const [showModalConfirm, setShowModalConfirm] = useState(false);
   const [customerToDelete, setCustomerToDelete] = useState({});
+  const [userUpdate, setUserUpdate] = useState({});
 
   const messageToast = (message) => {
     toast.success(message);
@@ -26,13 +28,13 @@ export default function User() {
       console.log(response.pageInfo.users);
     }
   };
-  const createuser = async (body) => {
-    let params = "usuario/create-user";
-    const response = await APISERVICE.post(body, params);
+  const createuser = async (user) => {
+    let url = "usuario/create-user";
+    const response = await APISERVICE.post(user, url);
     if (response.status === 200) {
       getUsers();
     }
-    console.log(response);
+    // console.log(response);
   };
 
   const deleteUserModal = async (id) => {
@@ -50,9 +52,10 @@ export default function User() {
     }
     setShowModalConfirm(false);
   };
-  const updateuser = async (body, id) => {
-    let params = "usuario/edit-user?id=";
-    const response = await APISERVICE.update(body, params, id);
+  const updateUser = async (user) => {
+    let url = `usuario/edit-user?`;
+    let params = `id=${user.id}`;
+    const response = await APISERVICE.post(user, url, params);
     if (response.status === 200) {
       getUsers();
     }
@@ -66,13 +69,15 @@ export default function User() {
     <>
       <div className="conteiner-user">
         <h1>Lista de Usuarios</h1>
+        <SearchInput/>
         <div>
           <UserTable
             getUsers={getUsers}
             users={users}
             pageInfo={pageInfo}
-            updateuser={updateuser}
             deleteUser={deleteUserModal}
+            setUserUpdate={setUserUpdate}
+            setModalShow={setModalShow}
           />
         </div>
 
@@ -80,15 +85,17 @@ export default function User() {
           Nuevo
         </button>
         <ModalCreateUser
-          modalShow={modalShow}
+          show={modalShow}
           onHide={() => setModalShow(false)}
-          updateuser={updateuser}
           createuser={createuser}
+          userUpdate={userUpdate}
+          setUserUpdate={setUserUpdate}
+          updateUser={updateUser}
         />
         <ModalConfirm
           show={showModalConfirm}
           onHide={setShowModalConfirm}
-          deleteCustomer={deleteUser}
+          deleteSomething={deleteUser}
         />
         <Toaster position="top-right" reverseOrder={false} />
       </div>
