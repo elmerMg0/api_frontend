@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { Button } from 'react-bootstrap'
 import ModalCreateUser from './ModalCreateUser'
 
-export default function UserTableRow({res,deleteUser,updateuser,createuser}) {
+export default function UserTableRow({res,deleteUser,updateuser}) {
 
   const [modalShow, setModalShow] = useState(false);
   return (
@@ -17,13 +17,6 @@ export default function UserTableRow({res,deleteUser,updateuser,createuser}) {
           <button onClick={() => deleteUser(res.id)} className='btn-danger'>Eliminar</button>
         </td>
       </tr>
-      <ModalCreateUser
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        updateuser={updateuser}
-        createuser={createuser}
-        valuerow={res}
-      />
     </>
  
 

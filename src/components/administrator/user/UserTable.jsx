@@ -1,10 +1,9 @@
 import React,{useState} from 'react'
-import { Button, Table } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 import Paginator from '../../global/paginador/Paginator';
-import ModalCreateUser from './ModalCreateUser';
 import UserTableRow from './UserTableRow'
 
-export default function UserTable({getUsers,  users, pageInfo, updateuser, deleteUser,createuser}) {
+export default function UserTable({getUsers,  users, pageInfo, updateuser, deleteUser}) {
 
   
   return (
@@ -28,7 +27,6 @@ export default function UserTable({getUsers,  users, pageInfo, updateuser, delet
                     res={res} 
                     updateuser={updateuser} 
                     deleteUser={deleteUser} 
-                    createuser={createuser}
                   />
                  
      

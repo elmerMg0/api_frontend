@@ -2,12 +2,12 @@ import React from 'react'
 import { Modal } from 'react-bootstrap'
 import FormUser from './FormUser'
 
-export default function ModalCreateUser(props) {
+export default function ModalCreateUser({modalShow}) {
     
   return (
       <>
           <Modal
-              {...props}
+              modalShow
               size="lg-sm"
               aria-labelledby="contained-modal-title-vcenter"
               centered
@@ -19,10 +19,7 @@ export default function ModalCreateUser(props) {
               </Modal.Header>
               <Modal.Body className='ms-3 me-3'>
                   <FormUser
-                      onHide={props.onHide}
-                      createuser={props.createuser}
-                      updateuser={props.updateuser}
-                      valuerow={props.valuerow}
+                     
                   />
               </Modal.Body>
 
