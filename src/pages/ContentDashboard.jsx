@@ -2,6 +2,7 @@ import CustomerCrud from '../components/administrator/customer/CustomerCrud'
 import CategoryCrud from '../components/administrator/category/CategoryCrud'
 import { useSelector } from 'react-redux'
 import ProductCrud from '../components/administrator/product/ProductCrud'
+import PointOfSale from '../components/administrator/pointOfSale/PointOfSale'
 const ContentDashboard = () => {
     //aqui todos los componente customers, users, products, etc
  
@@ -17,7 +18,10 @@ const ContentDashboard = () => {
       }
        {
         view === 'product' && <ProductCrud/>
-      }    
+      }
+       {
+        view === 'pos' && <PointOfSale/>
+      }        
     </>
   )
 }

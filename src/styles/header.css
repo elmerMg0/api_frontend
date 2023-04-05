@@ -19,8 +19,8 @@
 }
 
 .header{
-    display: grid;
-    grid-template-columns: 1fr 5fr ;
+    display: flex;
+    justify-content: space-between;
     padding: 20px;
     background-color: var(--colorMainBlack);
 }
