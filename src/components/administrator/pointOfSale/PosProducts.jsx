@@ -1,22 +1,26 @@
-import React from 'react'
+import React from "react";
 
-const PosProducts = ( {products} ) => {
+const PosProducts = ({ products }) => {
   return (
-    <div className='pos-products'>
-        <h5>Productos</h5>
-        {
-          products && products.length > 0 && 
-          products.map ( (prod) => {
+    <div className="pos-products">
+      <h5>Productos</h5>
+      <div className="pos-products-flex">
+        {products &&
+          products.length > 0 &&
+          products.map((prod) => {
             return (
-              <div className='pos-product'>
+              <div className="pos-product">
                 <h5>{prod.nombre}</h5>
-                <img src={"http://localhost:8080/upload/" + prod.url_image} alt="foto producto" />
+                <img
+                  src={"http://localhost:8080/upload/" + prod.url_image}
+                  alt="foto producto"
+                />
               </div>
-            )
-          })
-        }
+            );
+          })}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default PosProducts
+export default PosProducts;

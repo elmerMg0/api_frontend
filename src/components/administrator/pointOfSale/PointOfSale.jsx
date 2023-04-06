@@ -22,7 +22,7 @@ const PointOfSale = () => {
     setCategories(response.pageInfo.categories);
   };
 
-  const getProducts = async ( idCategory ) => {
+  const getProducts = async (idCategory) => {
     let url = "categoria/get-products-by-category/?";
     let params = `idCategory=${idCategory}`;
     const response = await APISERVICE.get(url, params);
@@ -31,7 +31,6 @@ const PointOfSale = () => {
     setProducts(response.products);
   };
 
-
   return (
     <div className="point-of-sale">
       <div className="pos-content">
@@ -39,7 +38,22 @@ const PointOfSale = () => {
         <PosCategories categories={categories} getProducts={getProducts} />
         <PosProducts products={products} />
       </div>
-      <div></div>
+      <div className="pos-pay">
+        <div className="pos-pay__coins">
+          <button className="btn-main">Bs. 20</button>
+          <button className="btn-main">Bs. 20</button>
+          <button className="btn-main">Bs. 20</button>
+          <button className="btn-main">Bs. 20</button>
+          <button className="btn-main">Bs. 20</button>
+          <button className="btn-main">Bs. 20</button>
+          <button className="btn-main">Bs. 20</button>
+          <button className="btn-main">Bs. 20</button>
+        </div>
+        <div className="pos-pay__btns">
+          <button className="btn-main-green">Cobrar</button>
+          <button className="btn-main-red">Salir</button>
+        </div>
+      </div>
     </div>
   );
 };
