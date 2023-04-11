@@ -9,9 +9,11 @@
 
 .point-of-sale{
     margin: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template-rows: 11fr 1fr;
+    height: calc(100vh - 135px);
+    gap: 20px;
+
 }
 .pos-content{
     display: grid;
@@ -22,7 +24,7 @@
     box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
    -webkit-box-shadow: 0px 1px 10px 0px rgba(158 ,131, 131, 0.5);
    -moz-box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
-   height: 700px;
+   height: calc(100vh - 200px);
    overflow: scroll;
 }
 .pos-category{
@@ -37,6 +39,9 @@
     box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
     -webkit-box-shadow: 0px 1px 10px 0px rgba(158 ,131, 131, 0.5);
     -moz-box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
+   /*  overflow: scroll; */
+   height: calc(100vh - 200px);
+   overflow: scroll;
 }
 .pos-products-flex{
     display: flex;
@@ -61,8 +66,74 @@
     display: flex;
     gap: 5px;
 }
+.pos-pay__coins button{
+
+}
 
 .pos-pay__btns{
     display: flex;
     gap: 5px;
+}
+
+.pos-acount__header{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+}
+.pos-acount-row{
+   /*  box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
+    -webkit-box-shadow: 0px 1px 10px 0px rgba(158 ,131, 131, 0.5);
+    -moz-box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5); */
+}
+.btns-quantity{
+    display: flex;
+}
+.btns-quantity button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.pos-acount__table{
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+    margin: 5px 0;
+  }
+  
+  th {
+    text-align: left;
+    background-color: #f5f5f5;
+    color: #777;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  td:last-child {
+    text-align: center;
+  }
+.pos-acount__footer{
+    display: flex;
+    justify-content: space-between;
 }

@@ -21,6 +21,7 @@ p,h1,h2,h3,h5{
 .dashboard{
    display: grid;
    grid-template-columns: 1fr 5fr;
+   height: calc(100vh - 72px);
 }
 
 @media ( max-width: 768px ){

@@ -3,12 +3,18 @@ import "../../../styles/pointOfSale.css";
 import PosCategories from "./PosCategories";
 import PosProducts from "./PosProducts";
 import PosAcount from "./PosAcount";
+import PosPay from "./PosPay";
 import { APISERVICE } from "../../../services/api.services";
+import { useSelector, useDispatch} from 'react-redux'
+import { updateCarrito } from "../../../redux/states/carrito";
+
 
 const PointOfSale = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-
+  //const [orderDetail, setOrderDetail] = useState([])
+  const dispatch = useDispatch();
+  const orderDetail = useSelector((store) => store.carrito.orderDetail);
   useEffect(() => {
     getCategories();
   }, []);
@@ -31,29 +37,36 @@ const PointOfSale = () => {
     setProducts(response.products);
   };
 
+  const addProductOrder = ( product ) => {
+    if(orderDetail){
+      let exists = orderDetail.some( prod => prod.id === product.id);
+      if(exists){
+        //incrementar la cantidad
+       /*    orderDetail.map( prod => {
+          if(prod.id === product.id){
+            product.cantidad += 1;
+          }
+        })
+        dispatch(updateCarrito([...orderDetail])); */
+      // setOrderDetail([...orderDetail]);
+    }else{
+      console.log('existe')
+        product.cantidad = 1;
+        //dispatch(updateCarrito(product))
+      //  setOrderDetail([...orderDetail, product]);
+      }
+  }
+    //console.log(orderDetail);
+  }
+
   return (
     <div className="point-of-sale">
       <div className="pos-content">
-        <PosAcount />
+        <PosAcount orderDetail={orderDetail}/>
         <PosCategories categories={categories} getProducts={getProducts} />
-        <PosProducts products={products} />
+        <PosProducts products={products} addProductOrder={addProductOrder} />
       </div>
-      <div className="pos-pay">
-        <div className="pos-pay__coins">
-          <button className="btn-main">Bs. 20</button>
-          <button className="btn-main">Bs. 20</button>
-          <button className="btn-main">Bs. 20</button>
-          <button className="btn-main">Bs. 20</button>
-          <button className="btn-main">Bs. 20</button>
-          <button className="btn-main">Bs. 20</button>
-          <button className="btn-main">Bs. 20</button>
-          <button className="btn-main">Bs. 20</button>
-        </div>
-        <div className="pos-pay__btns">
-          <button className="btn-main-green">Cobrar</button>
-          <button className="btn-main-red">Salir</button>
-        </div>
-      </div>
+      <PosPay/>
     </div>
   );
 };
