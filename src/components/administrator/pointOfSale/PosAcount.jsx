@@ -3,9 +3,11 @@ import calendar from "../../../assets/svg/calendar.svg";
 import clock from "../../../assets/svg/clock.svg";
 import { Table } from "react-bootstrap";
 import OrderDetailRow from "./OrderDetailRow";
-const PosAcount = ({ orderDetail }) => {
+import { useSelector } from 'react-redux'
+const PosAcount = ( ) => {
   const [dateCurrently, setDateCurrently] = useState("");
   const [hourCurrently, setHourCurrently] = useState("");
+  const orderDetail = useSelector( state => state.carrito.orderDetail);
 
   const updateDate = () => {
     let date = new Date();

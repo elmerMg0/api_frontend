@@ -46,6 +46,7 @@
 .pos-products-flex{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .pos-product{
     width: 200px;
