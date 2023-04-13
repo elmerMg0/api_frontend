@@ -8,7 +8,8 @@ const PosCategories = ( { categories, getProducts} ) => {
 
   return (
     <div className='pos-categories'>
-      <h5>Categorias</h5>
+      <h5 className='pos-title-contenedor'>Categorias</h5>
+      <div className='pos-cateogories-grilla'>
       {
         categories && categories.length > 0 &&
         categories.map( (cat) => {
@@ -18,6 +19,7 @@ const PosCategories = ( { categories, getProducts} ) => {
             </div>
         })
       }
+       </div>
     </div>
   )
 }

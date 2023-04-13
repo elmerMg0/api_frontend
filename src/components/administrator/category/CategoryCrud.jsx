@@ -139,25 +139,6 @@ const CategoryCrud = () => {
                setShow={setShow}
               deleteCategory={deleteCategory}
             />
-          {/* {inputSearchCategory.length > 0 ? (
-            <CategoryTable
-              categories={{}}
-              pageInfo={pageInfo}
-              getCategories={getCategories}
-              setCategoryToEdit={setCategoryToEdit}
-              setShow={setShow}
-              deleteCategory={deleteCategory}
-            />
-          ) : (
-            <CategoryTable
-              categories={categories}
-              pageInfo={pageInfo}
-              getCategories={getCategories}
-              setCategoryToEdit={setCategoryToEdit}
-               setShow={setShow}
-              deleteCategory={deleteCategory}
-            />
-          )} */}
         </>
       )}
         <CategoryModal

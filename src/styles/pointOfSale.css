@@ -26,14 +26,26 @@
    -moz-box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
    height: calc(100vh - 200px);
    overflow: scroll;
+   text-align: center;
+}
+.pos-cateogories-grilla{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 .pos-category{
     text-align: center;
+    cursor: pointer;
+}
+.pos-category h5{
+    margin: 0;
 }
 .pos-category img{
     width: 100%;
+    height: 150px;
     object-fit: cover;
     padding: 0px 10px;
+    pointer-events: none;
 }
 .pos-products{
     box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
@@ -43,6 +55,11 @@
    height: calc(100vh - 200px);
    overflow: scroll;
 }
+.pos-title-contenedor{
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+}
 .pos-products-flex{
     display: flex;
     flex-wrap: wrap;
@@ -51,9 +68,24 @@
 .pos-product{
     width: 200px;
     padding: 0px 10px;
+    text-align: left;
+    cursor: pointer;
+}
+.pos-product h5{
+    margin: 0;
+    font-weight: 400;
+}
+.pos-product span{
+    font-weight: 600;
+}
+.pos-product p{
+    color: #777;
 }
 .pos-product img{
     width: 100%;
+    height: 200px;
+    object-fit: contain;
+    pointer-events: none;
 }
 
 .pos-pay{
@@ -66,9 +98,6 @@
 .pos-pay__coins{    
     display: flex;
     gap: 5px;
-}
-.pos-pay__coins button{
-
 }
 
 .pos-pay__btns{
@@ -127,9 +156,9 @@ table {
     background-color: #f2f2f2;
   }
   
-  tr:hover {
+/*   tr:hover {
     background-color: #f5f5f5;
-  }
+  } */
   
   td:last-child {
     text-align: center;

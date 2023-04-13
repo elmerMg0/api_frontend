@@ -6,17 +6,24 @@ import PosAcount from "./PosAcount";
 import PosPay from "./PosPay";
 import { APISERVICE } from "../../../services/api.services";
 import { useSelector, useDispatch } from "react-redux";
-import { updateCarrito } from "../../../redux/states/carrito";
-
+import { updateCarrito, deleteCarrito } from "../../../redux/states/carrito";
+import { Toaster, toast} from "react-hot-toast";
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 const PointOfSale = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  //const [orderDetail, setOrderDetail] = useState([])
   const dispatch = useDispatch();
   const orderDetail = useSelector((store) => store.carrito.orderDetail);
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPaid, setTotalPaid] = useState(0)
+  
   useEffect(() => {
     getCategories();
   }, []);
+  useEffect( () => {
+    settotalPrice()
+  }, [orderDetail])
 
   const getCategories = async (pageNumber = 1) => {
     let url = "categoria/?";
@@ -37,51 +44,75 @@ const PointOfSale = () => {
   };
 
   const addProductOrder = (product) => {
-   /*  if (orderDetail) {
-      let exists = orderDetail.some((prod) => prod.id === product.id);
-      if (exists) {
-        //incrementar la cantidad
-        const orderDetail2 = [...orderDetail];
-        const test = orderDetail2.map((prod) => {
-          if (prod.id === product.id) {
-            prod.precio_venta += 1;
-          }
-          return prod;
-        });
-        console.log(orderDetail2)
-        //dispatch(updateCarrito([...orderDetail]));
-        // setOrderDetail([...orderDetail]);
-      } else {  
-        console.log("no existe");
-        let newProduct = {...product, cantidad: 1}
-        Object.defineProperty(newProduct, 'cantidad', {
-          writable: true
-        });
-        product.cantidad = 1;
-        dispatch(updateCarrito( product ));
-        //  setOrderDetail([...orderDetail, product]);
-      }
-    } */
-    console.log(orderDetail)
-    dispatch( updateCarrito(product));
-    //console.log(orderDetail);
+    dispatch( updateCarrito( product ));
   };
 
+  const createSale = async ( value ) => {
+    let userId = 1
+    let customerId = 5
+    let test = totalPaid + value;
+    if( test >= totalPrice && totalPrice > 0){
+      console.log('pagado');
+      let url = 'venta/create/?'
+      let params = `userId=${userId}&customerId=${customerId}`
+      let body = {
+      orderDetail,
+      cantidadTotal: totalPrice,
+      cantidadPagada: totalPaid,
+      estado: 'pagado',
+       }
+      const response = await APISERVICE.post( body, url, params);
+      if( response.success ){
+        dispatch(deleteCarrito())
+        setTotalPaid(0);
+        toast.success('Pedido enviado correctamente')
+        generatePDF(  );
+      }
 
-  const createStore = async () => {
-    let url = ''
-    const resposne = await APISERVICE.post( orderDetail, url);
-    
+    }else{
+      setTotalPaid(totalPaid + value);
+    }
   }
+
+  const generatePDF = () => {
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: [80, 200],
+    });
+    doc.setFontSize(20);
+    doc.text('Numero de Pedido: 12', 15, 15);
+    doc.setTextColor(100);
+
+    const headers = [['Nombre', 'Cantidad', 'Precio Total']];
+
+    const data = orderDetail.map( prod => {
+      let total = prod.cantidad * prod.precio_venta
+      return [ prod.nombre,prod.cantidad,total];
+    })
+
+    doc.autoTable({
+      head: headers,
+      body: data, 
+      startY: 30
+    })
+    doc.text(`Total a pagar: ${totalPrice}`, doc.internal.pageSize.width - 20, doc.internal.pageSize.height - 10, { align: "right" });
+    doc.save(`${totalPrice}pedido.pdf`)
+  }
+
+  const settotalPrice = () => {
+    setTotalPrice( orderDetail.reduce( (ac, prod) => ac + prod.cantidad * prod.precio_venta,0 ))
+}
 
   return (
     <div className="point-of-sale">
       <div className="pos-content">
-        <PosAcount />
+        <PosAcount totalPrice={totalPrice}/>
         <PosCategories categories={categories} getProducts={getProducts} />
         <PosProducts products={products} addProductOrder={addProductOrder} />
       </div>
-      <PosPay />
+      <PosPay createSale={createSale} totalPrice={totalPrice} totalPaid={totalPaid} setTotalPaid={setTotalPaid}/>
+      <Toaster/>
     </div>
   );
 };
