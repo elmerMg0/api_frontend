@@ -13,7 +13,7 @@ export const APISERVICE = {
     },
     post: async ( body,url, params='') => {
         try{
-            const response = await fetch(`${APIURL}${url}${params}`,{
+            const response = await fetch(`${APIURL+url+params}`,{
                 method:'POST',
                 headers: {
                     'content-type':'application/json'
@@ -55,4 +55,5 @@ export const APISERVICE = {
             console.log(error)
         }
     }
+    
 }

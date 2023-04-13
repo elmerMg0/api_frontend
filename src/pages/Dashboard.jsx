@@ -7,9 +7,10 @@ const Dashboard = () => {
     <>
       <Header />
       <div className="dashboard">
-      <Navegation/>
-      <ContentDashboard/>
+        <Navegation />
+        <ContentDashboard />
       </div>
+
     </>
   );
 };

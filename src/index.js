@@ -4,6 +4,7 @@ import './styles/navigation.css';
 import './styles/header.css';
 import './styles/customerCrud.css';
 import './styles/globals.css';
+import './styles/user.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
