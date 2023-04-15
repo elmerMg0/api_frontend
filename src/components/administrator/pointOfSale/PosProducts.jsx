@@ -11,7 +11,7 @@ const PosProducts = ({ products, addProductOrder }) => {
       <h5 className='pos-title-contenedor'>Productos</h5>
       <div className="pos-products-flex">
         {products &&
-          products.length > 0 &&
+          products.length > 0 ?
           products.map((prod) => {
             return (
               <div key={prod.id} className="pos-product" onClick={() => handleAddProduct(prod)}>
@@ -23,7 +23,9 @@ const PosProducts = ({ products, addProductOrder }) => {
                   <p>{prod.nombre}</p>
               </div>
             );
-          })}
+          }):
+          <h5>No existen productos aun!</h5>
+          }
       </div>
     </div>
   );

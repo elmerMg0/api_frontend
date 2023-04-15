@@ -11,13 +11,15 @@ const PosCategories = ( { categories, getProducts} ) => {
       <h5 className='pos-title-contenedor'>Categorias</h5>
       <div className='pos-cateogories-grilla'>
       {
-        categories && categories.length > 0 &&
+        categories && categories.length > 0 ?
         categories.map( (cat) => {
           return <div className='pos-category' key={cat.id} onClick={() => handleSelectCategory(cat)}> 
                <h5>{cat.nombre}</h5>
                <img src={"http://localhost:8080/upload/" + cat.url_image} alt="" />
             </div>
         })
+        :
+        <h5>No existen categorias!</h5>
       }
        </div>
     </div>

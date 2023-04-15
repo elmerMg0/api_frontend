@@ -67,7 +67,7 @@ const PosAcount = ( {totalPrice} ) => {
             })
           ) : (
             <tr>
-              <td colSpan={5}>No existen pedidos aun :</td>
+              <td colSpan={5}>No existen pedidos aun :(</td>
             </tr>
           )}
           <tr>

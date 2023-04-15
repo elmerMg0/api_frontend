@@ -74,7 +74,17 @@ p,h1,h2,h3,h5{
 .row-table-notExist{
    text-align: center;
 }
-.search-bar img{
+.btn-new{
+   display: flex;
+   background-color: var(--colorMain);
+   border-radius: 10px;
+   gap: 5px;
+   padding: 7px 10px;
+}
+.btn-new button{
+   padding: 0;
+}
+.img-search-bar{
    position: absolute;
    right: 10px;
    bottom: 10px;
