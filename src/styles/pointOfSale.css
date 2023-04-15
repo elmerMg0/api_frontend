@@ -32,20 +32,30 @@
 .pos-cateogories-grilla{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 .pos-category{
     text-align: center;
     cursor: pointer;
+    position: relative;
 }
-.pos-category h5{
+.pos-category__title{
     margin: 0;
+    position:absolute;
+    bottom: 0;
+    background-color: var(--colorMain);
+    color: var(--colorWhite);
+    width: 100%;
+    padding: 2px 0px;
 }
+/* .pos-category h5{
+    margin: 0;
+} */
 .pos-category img{
     width: 100%;
     height: 150px;
     object-fit: cover;
-    padding: 0px 10px;
+   /*  padding: 0px 10px; */
     pointer-events: none;
 }
 .pos-products{
@@ -59,7 +69,7 @@
 }
 .pos-title-contenedor{
     text-align: center;
-    margin-top: 15px;
+    margin: 15px 0px 10px 0px;
     font-weight: 600;
 }
 .pos-products-flex{
@@ -125,6 +135,10 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+}
+.pos-acount__scroll{
+    height: calc(100vh - 250px);
+    overflow: scroll;
 }
 .pos-acount__table{
     width: 100%;

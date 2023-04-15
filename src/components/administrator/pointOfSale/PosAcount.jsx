@@ -45,6 +45,7 @@ const PosAcount = ( {totalPrice} ) => {
           {hourCurrently}
         </div>
       </div>
+      <div className="pos-acount__scroll">
       <table className="pos-acount__table">
         <thead>
           <tr>
@@ -80,6 +81,7 @@ const PosAcount = ( {totalPrice} ) => {
             </tr>
         </tbody>
       </table>
+      </div>
     </div>
   );
 };

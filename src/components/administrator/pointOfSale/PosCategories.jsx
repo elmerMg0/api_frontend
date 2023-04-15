@@ -14,7 +14,7 @@ const PosCategories = ( { categories, getProducts} ) => {
         categories && categories.length > 0 ?
         categories.map( (cat) => {
           return <div className='pos-category' key={cat.id} onClick={() => handleSelectCategory(cat)}> 
-               <h5>{cat.nombre}</h5>
+               <h5 className='pos-category__title'>{cat.nombre}</h5>
                <img src={"http://localhost:8080/upload/" + cat.url_image} alt="" />
             </div>
         })
