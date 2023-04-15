@@ -10,6 +10,7 @@
 
 .customers{
   margin: 50px;
+  width: 100%;
 }
 .customers h3{
    margin: 0;
@@ -19,15 +20,16 @@ p,h1,h2,h3,h5{
    padding: 0;
 }
 .dashboard{
-   display: grid;
-   grid-template-columns: 1fr 5fr;
+   /* display: grid;
+   grid-template-columns: 1fr 5fr; */
+   display: flex;
    height: calc(100vh - 72px);
 }
 
 @media ( max-width: 768px ){
-   .dashboard{
+   /* .dashboard{
       grid-template-columns: 1fr 4fr;
-   }
+   } */
 }
 .paginator{
    display: flex;

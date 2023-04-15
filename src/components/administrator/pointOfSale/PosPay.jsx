@@ -25,7 +25,6 @@ const PosPay = ( { createSale, totalPrice, totalPaid,setTotalPaid } ) => {
           <button className="btn-main" onClick={() => handleAccumalateAcount(200)}>Bs/. 200</button>
           <button className="btn-main" onClick={() => handleAccumalateAcount(totalPrice)}>Exacto</button>
         </div>
-        <button>{totalPaid}</button>
         <div className="pos-pay__btns">
           <button className="btn-main-green">Cobrar</button>
           <button className="btn-main-red">Salir</button>
