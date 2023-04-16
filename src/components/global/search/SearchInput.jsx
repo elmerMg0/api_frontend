@@ -17,9 +17,9 @@ const SearchInput = ( { setShow, filterSomething, placeHolder} ) => {
             />
         <img className='img-search-bar' src={search} alt="icon-search" />
         </InputGroup>
-        <div className='btn-new'>
+        <div className='btn-new' onClick={() => setShow(true)}>
           <img src={onlyPlus} alt="" />
-          <button className='btn-main' onClick={() => setShow(true)}>
+          <button className='btn-main' >
             Nuevo</button>
         </div>
     </div>

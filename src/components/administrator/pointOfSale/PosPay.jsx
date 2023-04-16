@@ -1,17 +1,16 @@
 import React, {useState}from 'react'
 
-const PosPay = ( { createSale, totalPrice, totalPaid,setTotalPaid } ) => {
+const PosPay = ( { createSale, totalPrice, totalPaid,setTotalPaid, setShowModal } ) => {
 
   const [accumulateAcount, setAccumulateAcount] = useState(0)
 
   const handleAccumalateAcount = ( value ) => {
-    //setTotalPaid(totalPaid + value);
     createSale( value ); 
-   /*  if( totalPaid >= totalPrice){
-      console.log('pagado!')
-    } */
   }
 
+  const handleCollect = () => {
+    setShowModal(true)
+  }
 
   return (
     <div className="pos-pay">
@@ -26,7 +25,7 @@ const PosPay = ( { createSale, totalPrice, totalPaid,setTotalPaid } ) => {
           <button className="btn-main" onClick={() => handleAccumalateAcount(totalPrice)}>Exacto</button>
         </div>
         <div className="pos-pay__btns">
-          <button className="btn-main-green">Cobrar</button>
+          <button onClick={handleCollect} className="btn-main-green">Cobrar</button>
           <button className="btn-main-red">Salir</button>
         </div>
       </div>
