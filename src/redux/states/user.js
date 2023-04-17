@@ -11,20 +11,21 @@ const userSlice = createSlice( {
     initialState: localStorage.getItem(UserKey) ? JSON.parse(localStorage.getItem(UserKey)) : initialState,
     reducers: {
         createUser: (state, action) => {
-            state.username = action.payload.username;
-            state.accessToken = action.payload.accessToken;
+           /*  state.username = action.payload.username;
+            state.accessToken = action.payload.accessToken; */
             //state = { ...state, ...action.payload}
-            persistLocalStorage(UserKey , state)
-            //return action.payload;
+            persistLocalStorage(UserKey , action.payload)
+            return action.payload;
         }, 
         updateUser: ( state, action) => {
-
-        } ,
-        deleteUser: (state, action) => {
-
+            const result = {...state, ...action.payload}
+            persistLocalStorage(UserKey, result);
+        } , 
+        resetUser: () => {
+            return initialState;
         }
        }
 })
 
-export const { createUser, updateUser, deleteUser } = userSlice.actions;
+export const { createUser, updateUser, resetUser } = userSlice.actions;
 export default userSlice.reducer; 

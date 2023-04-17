@@ -1,6 +1,6 @@
 const APIURL = process.env.REACT_APP_API_URL;
 const tokenLocal = JSON.parse(localStorage.getItem('user'));
-let token = `Bearer ${tokenLocal.accessToken}`
+let token = tokenLocal ? `Bearer ${tokenLocal.accessToken}`: ''
 
 export const APISERVICE = {
   get: async (url, params = "") => {
@@ -23,6 +23,7 @@ export const APISERVICE = {
         method: "POST",
         headers: {
           "content-type": "application/json",
+          Authorization: token
         },
         body: JSON.stringify(body),
       });
@@ -37,9 +38,9 @@ export const APISERVICE = {
     try {
       const response = await fetch(`${APIURL}${url}${params}`, {
         method: "POST",
-        /*   headers: {
-                    'content-type':'application/json'
-                }, */
+        headers: {
+          Authorization: token,
+        },
         body: body,
       });
       const data = await response.json();
@@ -53,6 +54,9 @@ export const APISERVICE = {
     try {
       const response = await fetch(`${APIURL}${url}${params}`, {
         method: "DELETE",
+        headers: {
+          Authorization: token
+        }
       });
       const data = await response.json();
       data.status = response.status;

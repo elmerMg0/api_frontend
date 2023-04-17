@@ -16,6 +16,7 @@ const PointOfSale = () => {
   const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
   const orderDetail = useSelector((store) => store.carrito.orderDetail);
+  const userId = useSelector( store => store.user.id);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalPaid, setTotalPaid] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -58,7 +59,6 @@ const PointOfSale = () => {
   };
 
   const createSale = async (value) => {
-    let userId = 1;
     let customerId = 5;
     let totalPaidSum = totalPaid + value;
     if (totalPaidSum >= totalPrice && totalPrice > 0) {
