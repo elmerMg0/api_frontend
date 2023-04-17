@@ -1,14 +1,9 @@
-import { Route,Routes } from "react-router-dom";
-import User from "./components/administrator/user/User";
 import Dashboard from './pages/Dashboard';
-import Login from "./pages/Login";
+import { AppRouter} from './routes/AppRouter';
 function App() {
   return (
     <div className="App">
-   
-        
-        <Dashboard/>
-
+      <AppRouter/>
     </div>
   );
 }

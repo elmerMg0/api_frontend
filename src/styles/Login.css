@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-form {
+.login {
   background: #fff;
   padding: 40px;
   border-radius: 10px;
@@ -17,7 +17,7 @@ form {
   width: 100%;
 }
 
-h2 {
+h2 {  
   margin-bottom: 30px;
   color: #333;
 }
@@ -44,7 +44,7 @@ label {
   margin-bottom: 5px;
 }
 
-form button {
+.login button {
   background-color: #3C8DBB;
   color: #fff;
   border: none;
@@ -55,6 +55,6 @@ form button {
   transition: all 0.3s ease-in-out;
 }
 
-form button:hover {
+.login button:hover {
   background-color: #367FA6;
 }
