@@ -73,7 +73,7 @@ a{
 .navigation__content{
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 16px;
     margin: 0px 25px;
 }
 .navigation__content button{

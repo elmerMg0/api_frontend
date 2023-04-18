@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import bussines from "../../../assets/svg/bussines.svg";
 import customer from "../../../assets/svg/customer.svg";
-import user from "../../../assets/svg/user.svg";
+import users from "../../../assets/svg/users.svg";
 import product from "../../../assets/svg/product.svg";
 import trolley from "../../../assets/svg/trolley.svg";
 import pos from "../../../assets/svg/pos.svg";
@@ -56,7 +56,7 @@ const Navegation = () => {
         onClick={() => handleOnClick("user")}
         className="navigation__content"
       >
-        <img src={user} alt="svgImg" />
+        <img src={users} alt="svgImg" />
         <button className="navigation__link" href="">
           Usuarios
         </button>
