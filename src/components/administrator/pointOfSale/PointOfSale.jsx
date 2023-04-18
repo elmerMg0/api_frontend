@@ -22,6 +22,9 @@ const PointOfSale = () => {
   const [showModal, setShowModal] = useState(false);
   const [customers, setCustomers] = useState([]);
   const [payType, setPayType] = useState('');
+  const [showModalStartPeriod, setShowModalStartPeriod] = useState(false)
+  const [existsPeriodActive, setExistsPeriodActive] = useState(false);
+
   useEffect(() => {
     getCategories();
     getCustomers();

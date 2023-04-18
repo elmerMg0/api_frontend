@@ -69,6 +69,7 @@ a{
 
 .bg-link{
     background-color: var(--colorSecundary);
+    border-left: 5px solid green;
 }
 .navigation__content{
     display: flex;

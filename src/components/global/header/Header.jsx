@@ -26,7 +26,7 @@ const Header = () => {
     <div className='header'>
         <h5>Bussines Name</h5>
         <div className='header-user'>
-          <h5>{username}</h5>
+          <h5>Hola, {username}</h5>
           <img src={user} alt='user-icon' />
           <img  onClick={() => handleOpenModal()} src={chevronDown} alt="down-icon" />
           {

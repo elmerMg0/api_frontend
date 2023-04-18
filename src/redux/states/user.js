@@ -3,6 +3,7 @@ import { clearLocalStorage, persistLocalStorage } from "../../utilities/localSto
 const initialState = {
     username: '',
     accessToken: '',
+    periodUser: ''
 }
 
 export const UserKey = 'user';
@@ -20,6 +21,7 @@ const userSlice = createSlice( {
         updateUser: ( state, action) => {
             const result = {...state, ...action.payload}
             persistLocalStorage(UserKey, result);
+            return result;
         } , 
         resetUser: () => {
             return initialState;

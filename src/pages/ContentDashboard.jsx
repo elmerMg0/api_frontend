@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import ProductCrud from '../components/administrator/product/ProductCrud'
 import PointOfSale from '../components/administrator/pointOfSale/PointOfSale'
 import User from '../components/administrator/user/User'
+import Period from '../components/administrator/period/Period'
 const ContentDashboard = () => {
     //aqui todos los componente customers, users, products, etc
  
@@ -25,8 +26,11 @@ const ContentDashboard = () => {
       }        
       
       {
-        view == 'user' && <User/>
+        view === 'user' && <User/>
       }  
+       {
+        view === 'period' && <Period/>
+      } 
     </>
   )
 }

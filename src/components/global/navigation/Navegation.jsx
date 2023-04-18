@@ -14,6 +14,7 @@ import arrowRigth from "../../../assets/svg/arrowRigth.svg";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createView } from "../../../redux/states/dashboard";
+import period from '../../../assets/svg/period.svg';
 const Navegation = () => {
   const dispatch = useDispatch();
   const view = useSelector((store) => store.dashboard);
@@ -173,6 +174,20 @@ const Navegation = () => {
       </div>
     </li>
   );
+
+  const periodLink = (
+    <li className={view === "period" ? "bg-link" : ""}>
+      <div
+        onClick={() => handleOnClick("period")}
+        className="navigation__content"
+      >
+        <img src={period} alt="svgImg" />
+        <button className="navigation__link" href="">
+          Period
+        </button>
+      </div>
+    </li>
+  );
   return (
     <div
       className="navigation"
@@ -190,6 +205,7 @@ const Navegation = () => {
           {userRole.administrador && reportsLink}
           {helpLink}
           {userRole.administrador && aboutLink}
+          {periodLink}
           <button
             className="btn-maxmin"
             onClick={() => handleNavigationWidth()}
