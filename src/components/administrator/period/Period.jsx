@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BoxOpening from './BoxOpening'
 import '../../../styles/period.css'
 import { APISERVICE } from '../../../services/api.services'
@@ -11,6 +11,10 @@ const Period = () => {
   const periodUser = useSelector(store => store.user.periodUser); 
   const dispatch = useDispatch();
   const [infoBoxClose, setInfoBoxClose] = useState({});
+
+  useEffect(() => {
+    getDetailPeriod();
+  }, [])
 
   const openBox =  async ( initialAmount ) => {
     let url = 'periodo/start-period/?'
@@ -28,15 +32,20 @@ const Period = () => {
     }
   }
 
-  const closeBox = () => {
-
+  const closeBox = async ( total ) => {
+    let url = 'periodo/close-period?';
+    let params = `idPeriod=${periodUser.id}&idUser=${user.id}`;
+    const { success } = await APISERVICE.post({totalCierreCaja: total}, url, params)
+    if(success){
+      dispatch(updateUser({periodUser: {}}))
+    }
   }
 
   const getDetailPeriod = async () => {
     let url = 'periodo/get-detail-period/?';
     let params = `idUser=${user.id}&idPeriod=${periodUser.id}`
     const { success, info} = await APISERVICE.get(url, params);
-    if( success) {
+    if( success ) {
       setInfoBoxClose(info);
     }
   }
