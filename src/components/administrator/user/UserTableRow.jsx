@@ -11,9 +11,9 @@ export default function UserTableRow({
   return (
     <>
       <tr>
-        <td className="col-4">{user.nombres}</td>
-        <td className="col-2">{user.tipo}</td>
-        <td className="col-2">image</td>
+        <td className="col-5">{user.nombres}</td>
+        <td className="col-4">{user.tipo}</td>
+        <td className="img-user"><img src={`http://localhost:8080/upload/${user.url_image}`} alt="foto user" /></td>
         <td className="col-2 text-center">
           <button
             className="btn-main"

@@ -28,13 +28,25 @@ export default function User() {
       console.log(response.pageInfo.users);
     }
   };
-  const createuser = async (user) => {
+  const createuser = async (user, image) => {
     let url = "usuario/create-user";
-    const response = await APISERVICE.post(user, url);
-    if (response.status === 200) {
-      getUsers();
+    const formData = new FormData();
+    let data = {
+      nombres: user.nombres,
+      username: user.username,
+      password: user.password,
+      tipo: user.tipo,
+
+    };
+    formData.append("data", JSON.stringify(data));
+    if (image) formData.append("file", user.url_image);
+
+    const response = await APISERVICE.postWithImage(formData, url);
+    if (response.status === 201) {
+      messageToast("Usuario agregado exitosamente!");
     }
-    // console.log(response);
+    //envio de imagen categoria
+    getUsers();
   };
 
   const deleteUserModal = async (id) => {
@@ -52,14 +64,27 @@ export default function User() {
     }
     setShowModalConfirm(false);
   };
-  const updateUser = async (user) => {
-    let url = `usuario/edit-user?`;
-    let params = `id=${user.id}`;
-    const response = await APISERVICE.post(user, url, params);
+
+  const updateUser = async (user, image) => {
+    let $url = `usuario/edit-user?`;
+    let $params = `id=${user.id}`;
+
+    const data = new FormData()
+    
+    let body = {
+      nombres: user.nombres,
+      username: user.username,
+      password: user.password,
+      tipo: user.tipo,
+
+    };
+    data.append('data', JSON.stringify(body));
+    if(image)data.append('file', user.url_image) 
+    const response = await APISERVICE.postWithImage(data, $url, $params);
     if (response.status === 200) {
-      getUsers();
+      messageToast('Usuario Actualizado')
     }
-    console.log(response);
+    getUsers();
   };
 
   useEffect(() => {
@@ -69,7 +94,7 @@ export default function User() {
     <>
       <div className="conteiner-user">
         <h1>Lista de Usuarios</h1>
-        <SearchInput/>
+        <SearchInput />
         <div>
           <UserTable
             getUsers={getUsers}

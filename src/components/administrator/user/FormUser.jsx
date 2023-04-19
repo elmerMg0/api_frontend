@@ -13,10 +13,10 @@ function FormUser({
     username: "",
     password: "",
     tipo: "",
-    foto: null,
+    url_image: "",
   };
   console.log(userUpdate.id);
-  const [foto, setFoto] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
   const [value, setValue] = useState(userUpdate ? userUpdate : initialValues);
 
   const handleChange = (e) => {
@@ -25,18 +25,34 @@ function FormUser({
       [e.target.name]: e.target.value,
     });
   };
+  const handleChangeImage = (event) => {
+    setValue({
+      ...value, 
+      [event.target.name]:event.target.files[0]
+    })
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSelectedImage(e.target.result);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (userUpdate.id) {
-      updateUser(value);
+      updateUser(value,selectedImage);
       onHide();
     } else {
-      createuser(value);
+      createuser(value,selectedImage);
       onHide();
     }
+    setUserUpdate({});
+    setSelectedImage(null)
   };
+
   const handleCancel = () => {
     setUserUpdate({});
     onHide();
@@ -93,12 +109,31 @@ function FormUser({
         <Form.Control
           className="form-control-file"
           type="file"
-          name="foto"
+          name='url_image'
           id="foto"
           value={value.foto ? value.foto : ""}
-          onChange={handleChange}
+          accept='.jpg,.png,jpng'
+          onChange={handleChangeImage}
         />
       </Form.Group>
+      {
+          selectedImage ?
+          <div className="modal-category-image">
+            <img src={selectedImage} alt="preview"  />
+          </div>
+            :
+            <>
+              {
+                value.url_image && value.url_image.length > 0 &&
+                <div className="modal-category-image">
+                  <img src={`http://localhost:8080/upload/${value.url_image}`} alt="a" />
+                </div>
+                
+              }
+              </> 
+            
+
+         }
       <hr />
       <Form.Group className="mb-3 d-flex justify-content-evenly">
         <button className="btn-main-red" onClick={handleCancel}>
