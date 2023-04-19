@@ -32,9 +32,9 @@ const OrderDetailRow = ({ product }) => {
           <img src={trash} alt="" />
         </button>
       </td>
-      <td className="col-2">{product.cantidad}</td>
+      <td>{product.cantidad}</td>
       <td>{product.nombre}</td>
-      <td>{product.precio_venta}</td>
+      <td style={{textAlign: 'right'}}>{`${product.precio_venta}.00`}</td>
       <td className="btns-quantity">
         <button onClick={() => handlePlusQuantity()}>
           <img src={plus} alt="" />

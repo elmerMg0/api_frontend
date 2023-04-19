@@ -1,6 +1,7 @@
 import React from 'react'
 import { InputGroup, Form } from 'react-bootstrap'
 import search from '../../../assets/svg/search.svg'
+import onlyPlus from '../../../assets/svg/onlyPlus.svg'
 const SearchInput = ( { setShow, filterSomething, placeHolder} ) => {
 
   const handleOnChange = (e) => {
@@ -14,9 +15,13 @@ const SearchInput = ( { setShow, filterSomething, placeHolder} ) => {
                 placeholder={placeHolder}
                 onChange={(e)=> handleOnChange(e) }
             />
-        <img src={search} alt="icon-search" />
+        <img className='img-search-bar' src={search} alt="icon-search" />
         </InputGroup>
-        <button className='btn-main'onClick={() => setShow(true)}>Nuevo</button>
+        <div className='btn-new' onClick={() => setShow(true)}>
+          <img src={onlyPlus} alt="" />
+          <button className='btn-main' >
+            Nuevo</button>
+        </div>
     </div>
   )
 }
