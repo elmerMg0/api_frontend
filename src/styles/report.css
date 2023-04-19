@@ -7,16 +7,7 @@
     --colorWhite: #ffffff;
 }
 
-.period{
+.report {
     margin: 50px;
     width: 100%;
-}
-.box-opening__form{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px 10px;
-    margin: 20px 0px;
-}   
-.box-opening__form label{
-    font-size: 16px;
 }
