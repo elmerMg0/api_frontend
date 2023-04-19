@@ -13,8 +13,12 @@ const Period = () => {
   const [infoBoxClose, setInfoBoxClose] = useState({});
 
   useEffect(() => {
-    getDetailPeriod();
+    existsPeriodActive();
   }, [])
+
+  useEffect(() => {
+    getDetailPeriod();
+  }, [periodUser])
 
   const openBox =  async ( initialAmount ) => {
     let url = 'periodo/start-period/?'
@@ -43,12 +47,32 @@ const Period = () => {
 
   const getDetailPeriod = async () => {
     let url = 'periodo/get-detail-period/?';
-    let params = `idUser=${user.id}&idPeriod=${periodUser.id}`
-    const { success, info} = await APISERVICE.get(url, params);
-    if( success ) {
-      setInfoBoxClose(info);
+    if(periodUser && Object.keys(periodUser).length > 0){
+      let params = `idUser=${user.id}&idPeriod=${periodUser.id}`
+      const { success, info} = await APISERVICE.get(url, params);
+      if( success ) {
+         setInfoBoxClose(info);
+         console.log(info)
+        }
+      console.log(periodUser);
     }
   }
+
+  const existsPeriodActive = async () => {
+    let url = 'periodo/exists-period-active-by-id/?'
+    let params = `idUser=${user.id}`
+    const { success, period} = await APISERVICE.get(url, params);
+    if(success){
+      const periodData = {
+        periodUser: {
+          id: period.id,
+          state: period.estado
+        }
+      }
+      dispatch(updateUser( periodData ));
+    }
+  }
+  //actionExistsPeriodActiveById}
 
   return (
       <div className='period'>

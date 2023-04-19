@@ -31,7 +31,6 @@ const BoxClosing = ({ closeBox, infoBoxClose }) => {
         totalCard: totalSaleCard,
         totalGlobal: totalSale,
       });
-      console.log(period.caja_inicial);
     }
   }, [infoBoxClose]);
 
@@ -40,6 +39,7 @@ const BoxClosing = ({ closeBox, infoBoxClose }) => {
   };
 
   const handleCloseBox = () => {
+    //validar total sea entero 
     closeBox( infoPeriod.total );
     setinfoPeriod(initialState)
   };

@@ -1,6 +1,11 @@
 const APIURL = process.env.REACT_APP_API_URL;
-const tokenLocal = JSON.parse(localStorage.getItem('user'));
-let token = tokenLocal ? `Bearer ${tokenLocal.accessToken}`: ''
+
+let token = '';
+function getToken ( ) {
+  const tokenLocal = JSON.parse(localStorage.getItem('user'));
+  token = tokenLocal ? `Bearer ${tokenLocal.accessToken}`: ''
+}
+getToken();
 
 export const APISERVICE = {
   get: async (url, params = "") => {
