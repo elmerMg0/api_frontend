@@ -37,10 +37,10 @@ const Navegation = () => {
     console.log(userRole.administrador);
   };
 
-  const bussinesLink = (
+  const companyLink = (
     <li className={view === "bussines" ? "bg-link" : ""}>
       <div
-        onClick={() => handleOnClick("bussines")}
+        onClick={() => handleOnClick("company")}
         className="navigation__content"
       >
         <img src={bussines} alt="svgImg" />
@@ -195,7 +195,7 @@ const Navegation = () => {
     >
       <div className="navigation__links">
         <ul>
-          {userRole.administrador && bussinesLink}
+          {userRole.administrador && companyLink}
           {userRole.administrador && usersLink}
           {userRole.administrador && customerLink}
           {userRole.administrador && productsLink}

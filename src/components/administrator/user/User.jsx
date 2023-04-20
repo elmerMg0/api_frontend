@@ -13,6 +13,9 @@ export default function User() {
   const [showModalConfirm, setShowModalConfirm] = useState(false);
   const [customerToDelete, setCustomerToDelete] = useState({});
   const [userUpdate, setUserUpdate] = useState({});
+  const [inputSearchUser, setInputSearchUser] = useState("");
+  const [usersFilter, setusersFilter] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
 
   const messageToast = (message) => {
     toast.success(message);
@@ -36,7 +39,6 @@ export default function User() {
       username: user.username,
       password: user.password,
       tipo: user.tipo,
-
     };
     formData.append("data", JSON.stringify(data));
     if (image) formData.append("file", user.url_image);
@@ -69,46 +71,78 @@ export default function User() {
     let $url = `usuario/edit-user?`;
     let $params = `id=${user.id}`;
 
-    const data = new FormData()
-    
+    const data = new FormData();
+
     let body = {
       nombres: user.nombres,
       username: user.username,
       password: user.password,
       tipo: user.tipo,
-
     };
-    data.append('data', JSON.stringify(body));
-    if(image)data.append('file', user.url_image) 
+    data.append("data", JSON.stringify(body));
+    if (image) data.append("file", user.url_image);
     const response = await APISERVICE.postWithImage(data, $url, $params);
     if (response.status === 200) {
-      messageToast('Usuario Actualizado')
+      messageToast("Usuario Actualizado");
     }
     getUsers();
+  };
+  const getAllUsers = async () => {
+    let url = "usuario/get-all-users";
+    const response = await APISERVICE.get(url);
+    if (response.status === 200) {
+      setAllUsers(response.users);
+    }
+  };
+  const filterUser = (user) => {
+    if (user.length > 0) {
+      setInputSearchUser(user);
+
+      setusersFilter(
+        allUsers.filter((res) =>
+          res.nombres.toLowerCase().includes(user.toLowerCase())
+        )
+      );
+    } else {
+      setInputSearchUser("");
+      setusersFilter([]);
+    }
   };
 
   useEffect(() => {
     getUsers();
+    getAllUsers();
   }, []);
   return (
     <>
       <div className="conteiner-user">
         <h1>Lista de Usuarios</h1>
-        <SearchInput />
+        <SearchInput
+          setShow={setModalShow}
+          filterSomething={filterUser}
+          placeHolder="cesar"
+        />
         <div>
-          <UserTable
-            getUsers={getUsers}
-            users={users}
-            pageInfo={pageInfo}
-            deleteUser={deleteUserModal}
-            setUserUpdate={setUserUpdate}
-            setModalShow={setModalShow}
-          />
+          {usersFilter.length > 0 || inputSearchUser.length > 0 ? (
+            <UserTable
+              getUsers={getUsers}
+              users={usersFilter}
+              pageInfo={pageInfo}
+              deleteUser={deleteUserModal}
+              setUserUpdate={setUserUpdate}
+              setModalShow={setModalShow}
+            />
+          ) : (
+            <UserTable
+              getUsers={getUsers}
+              users={users}
+              pageInfo={pageInfo}
+              deleteUser={deleteUserModal}
+              setUserUpdate={setUserUpdate}
+              setModalShow={setModalShow}
+            />
+          )}
         </div>
-
-        <button className="btn-main" onClick={() => setModalShow(true)}>
-          Nuevo
-        </button>
         <ModalCreateUser
           show={modalShow}
           onHide={() => setModalShow(false)}
