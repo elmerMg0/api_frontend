@@ -9,6 +9,14 @@
 .form-control{
     padding-right: 60%;
 }
-/* .head-table tr{
+.head-table tr{
     background-color: var(--colorMain);
- } */
+ }
+ .img-user{
+    max-width: 80px;
+    height: 30px;
+ }
+ .img-user img{
+    width: 100%;
+    border-radius: 5px;
+}
