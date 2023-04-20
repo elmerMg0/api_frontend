@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 
-function FormUser({
-  companyUpdate,
-  setCompanyUpdate,
-  updateCompany,
-}) {
+function FormUser({ value, updateCompany,setValue }) {
   const initialValues = {
+    id:"",
     nombre: "",
     email: "",
     phone: "",
@@ -14,7 +11,7 @@ function FormUser({
     nit: "",
   };
   //console.log(userUpdate.id);
-  const [value, setValue] = useState(updateCompany ? updateCompany : initialValues);
+  //const [value, setValue] = useState(company);
 
   const handleChange = (e) => {
     setValue({
@@ -25,13 +22,15 @@ function FormUser({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    companyUpdate(value);
+    updateCompany(value);
 
-      setCompanyUpdate({});
   };
+  //console.log(company)
+  useEffect(() => {
+  }, [value]);
 
   return (
-    <>
+    <div style={{width:"700px"}}>
       <Form.Group className="mb-3">
         <Form.Label htmlFor="nombre">Nombre Company</Form.Label>
         <Form.Control
@@ -48,7 +47,7 @@ function FormUser({
           type="email"
           id="email"
           name="email"
-          value={value.email }
+          value={value.email}
           onChange={handleChange}
         />
       </Form.Group>
@@ -58,7 +57,7 @@ function FormUser({
           type="number"
           id="phone"
           name="phone"
-          value={value.phone }
+          value={value.phone}
           onChange={handleChange}
         />
       </Form.Group>
@@ -68,7 +67,7 @@ function FormUser({
           type="number"
           id="phone"
           name="phone"
-          value={value.celular }
+          value={value.celular}
           onChange={handleChange}
         />
       </Form.Group>
@@ -78,7 +77,7 @@ function FormUser({
           type="number"
           id="nit"
           name="nit"
-          value={value.nit }
+          value={value.nit}
           onChange={handleChange}
         />
       </Form.Group>
@@ -89,7 +88,7 @@ function FormUser({
           Actualizar
         </button>
       </Form.Group>
-    </>
+    </div>
   );
 }
 
