@@ -12,13 +12,13 @@ const UserTable = ({
 }) => {
   return (
     <Table>
-      <thead className="head-table rounded-top">
+      <thead style={{borderRadius: '10px'}} className="head-table rounded-top">
         <tr>
-          <th>Nombre</th>
+          <th style={{borderTopLeftRadius: '10px'}}>Nombre</th>
           <th>Celular</th>
           <th>Direccion</th>
           <th>Descripcion</th>
-          <th style={{textAlign: 'center'}}>Acciones</th>
+          <th style={{textAlign: 'center', borderTopRightRadius: '10px'}}>Acciones</th>
         </tr>
       </thead>
       <tbody>

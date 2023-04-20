@@ -55,8 +55,9 @@ p,h1,h2,h3,h5{
 .color-main{
    background-color: var(--colorMain);
 }
-.head-table tr{
+.head-table{
    background-color: var(--colorMain);
+   border-radius: 10px;
 }
 .head-table tr th{
    color: var(--colorWhite);

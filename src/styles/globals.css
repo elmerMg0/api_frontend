@@ -47,3 +47,10 @@
     color: var(--colorWhite);
     background-color: var(--colorRedBlack);
 }
+
+.border-radius-top-rigth{
+    border-top-right-radius: '10px'
+}
+.border-radius-top-left{
+    border-top-left-radius: '10px';
+}

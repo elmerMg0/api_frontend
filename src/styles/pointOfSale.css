@@ -26,6 +26,8 @@
    -moz-box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
   /*  height: calc(100vh - 225px);
    overflow: scroll; */
+   border-top-right-radius: 10px;
+   border-top-left-radius: 10px;
    text-align: center;
    min-width: 150px;
 }
@@ -66,8 +68,9 @@
     -webkit-box-shadow: 0px 1px 10px 0px rgba(158 ,131, 131, 0.5);
     -moz-box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
    /*  overflow: scroll; */
-  
    min-width: 150px;
+   border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 .pos-title-contenedor{
     text-align: center;
@@ -115,6 +118,7 @@
     box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
     -webkit-box-shadow: 0px 1px 10px 0px rgba(158 ,131, 131, 0.5);
     -moz-box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
+    border-radius: 10px;
 }
 .pos-pay__coins{    
     display: flex;
@@ -129,6 +133,8 @@
      box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
     -webkit-box-shadow: 0px 1px 10px 0px rgba(158 ,131, 131, 0.5);
     -moz-box-shadow: 0px 1px 10px 0px rgba(158, 131, 131, 0.5);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 .pos-acount__header{
     display: flex;
@@ -183,7 +189,6 @@ table {
     font-size: 16px;
     font-weight: 500;
     color: #444;
-    margin: 5px 0;
   }
   
   th {
