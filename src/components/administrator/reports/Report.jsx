@@ -12,12 +12,13 @@ const fechaHaceUnMesFormateada = fechaHaceUnMes.getFullYear() + '-' + (fechaHace
 const Report = () => {
 
   const [infoLineChart, setInfoLineChart] = useState({})
-
+  const [infoPieChart, setInfoPieChart] = useState({})
   useEffect( () => {
     getInfoLineChart();
+    getBestSellerProducts()
   },[])
 
-  const getInfoLineChart = async ( body={fechaInicio: fechaHaceUnMes, fechaFin: dateCurrently, tipo: 'mes'} ) => {
+  const getInfoLineChart = async ( body={fechaInicio: fechaHaceUnMesFormateada, fechaFin: dateCurrently, tipo: 'dia'} ) => {
     let url = 'venta/get-info-line-chart'
     const { success, salesForDay} = await APISERVICE.post(body ,url);
     if( success ){
@@ -25,14 +26,21 @@ const Report = () => {
     }
   }
 
+  const getBestSellerProducts = async () => {
+    let url = 'detalle-venta/get-best-seller-product';
+    const {success, list } = await APISERVICE.get(url);
+    if ( success ){
+      setInfoPieChart(list);
+    } 
+  }
+
+
   return (
     <div className="report">
       <h5>Reportes</h5>
       <div className="report-grafics">
           <LinesChart infoLineChart={infoLineChart} getInfoLineChart={getInfoLineChart}/>
-        <div>
-          <PiesChart  />
-        </div>
+          <PiesChart  infoPieChart={infoPieChart}/>
       </div>
     </div>
   );
