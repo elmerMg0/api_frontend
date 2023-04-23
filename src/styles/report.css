@@ -11,3 +11,75 @@
     margin: 50px;
     width: 100%;
 }
+.report-grafics{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
+    gap: 20px;
+}
+.report-grafics__lines{
+    width: 100%;
+    padding: 15px;
+    height: auto;
+    -webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.22);
+    -moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.22);
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.22);
+}   
+.report-grafics__lines h5 strong{
+    color: var(--colorMain);
+}
+.report-grafics__lines h5 span{
+    color: var(--colorMain);
+    font-size: 16px;
+}
+.report-lines{
+    width: 100%;
+}
+.report-grafics__pies{
+    width: 100%;
+    height: auto;   
+}
+.report-pies{
+    width: 100%;
+}
+.btn-choice-range{
+    background-color: transparent;
+    color: var(--colorMain);
+    border: 1px solid var(--colorMain);
+    border-radius: 10px;
+    padding: 3px 10px;
+}
+
+.report__choice-range{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 10px 0px;
+}
+.report__choice-range input{
+    border: 1px solid var(--colorSecundary);
+    border-radius: 10px;
+    font-size: 14px;
+    height: 35px;
+}
+.report__choice-range button{
+    color: var(--colorWhite);
+    background-color: var(--colorMain);
+    padding: 5px 7px;
+    border: none;
+    border-radius: 10px;
+}
+
+.report-select{
+    padding: 5px;
+    border: 1px solid var(--colorMain);
+    background-color: transparent;
+    border-radius: 10px;
+    color: var(--colorMain);
+    text-align: center;
+}
+.report-grafics__btns{
+    display: flex;
+    gap: 8px;
+    margin: 5px 0px;
+}
