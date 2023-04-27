@@ -24,39 +24,6 @@ chartjs.register(
   Legend,
   Filler
 );
-//ventas
-const beneficios = [
-  0, 30, 20, 36, 8, 35, 30, 0, 25, 30, 13, 35, 30, 20, 36, 8, 35, 30, 0, 25, 30,
-  13, 35, 10,
-];
-//fechas por dias
-const meses = [
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agostro",
-  "Septiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
-  "Enero",
-  "Febrero",
-  "Marzo",
-  "Abril",
-  "Mayo",
-  "Junio",
-  "Julio",
-  "Agostro",
-  "Septiembre",
-  "Octubre",
-  "Noviembre",
-  "Diciembre",
-];
-
 
 const misOptions = {
   scales: {
@@ -92,7 +59,7 @@ export default function LinesChart( {infoLineChart, getInfoLineChart} ) {
     labels: values,
     datasets: [
       {
-        label: "Beneficios",
+        label: "Venta total",
         data: days,
         tension: 0.1,
         fill: true,
@@ -114,6 +81,9 @@ export default function LinesChart( {infoLineChart, getInfoLineChart} ) {
         setValues( infoLineChart.map( value => value.fecha));
       }
       setDays( infoLineChart.map( value => value.total));
+    }else{
+      setValues([])
+      setDays([])
     }
   },[infoLineChart])
 
