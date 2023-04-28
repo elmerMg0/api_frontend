@@ -143,4 +143,9 @@
     border: 1px solid var(--colorSecundary);
     border-radius: 10px;
     background-color: transparent;
+    outline: none;
+}
+
+.report-header-select{
+    padding: 9px 5px;
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Table} from 'react-bootstrap'
+import { Table, InputGroup, select, Form} from 'react-bootstrap'
 import ReportTableRow from './ReportTableRow'
 import Paginador from './../../global/paginador/Paginator'
 
@@ -25,17 +25,28 @@ const ReportTable = ( {salesByDay, getSalesByDay, users, pageInfoUsers} ) => {
   return (
     <div>
         <div className="report-header-seekers">
-            <input  name="fechaInicio" value={infoSearchSales.fechaInicio} type="date" onChange={handleOnChange}/>
-            <input  name="fechaFin" value={infoSearchSales.fechaFin} type="date" onChange={handleOnChange}/>
-            <select name="usuarioId"  value={infoSearchSales.usuarioId} onChange={handleOnChange}>
-                <option >Seleccione un usuario</option>
-                {
-                    users && users.length > 0 &&
-                    users.map(user => <option key={user.id} value={user.id}>{user.nombres}s</option>)
-                }
-                <option value="todos">Todos</option>
-            </select>
-            <button className="btn-main" on onClick={handleSearch}>Buscar</button>
+            <div className="d-flex flex-column">
+                <label htmlFor="">Fecha Inicio</label>
+                 <input  name="fechaInicio" value={infoSearchSales.fechaInicio} type="date" onChange={handleOnChange}/>
+            </div>
+            <div className="d-flex flex-column">
+                <label htmlFor="">Fecha Fin</label>
+                <input  name="fechaFin" value={infoSearchSales.fechaFin} type="date" onChange={handleOnChange}/>
+            </div>
+            <div className="d-flex flex-column">
+                <label htmlFor="">Usuario</label>
+                <select className="report-header-select" name="usuarioId"  value={infoSearchSales.usuarioId} onChange={handleOnChange}>
+                    <option >Seleccione un usuario</option>
+                    {
+                        users && users.length > 0 &&
+                        users.map(user => <option key={user.id} value={user.id}>{user.nombres}s</option>)
+                    }
+                    <option value="todos">Todos</option>
+                    </select>
+                </div>
+            <div className="d-flex flex-column justify-content-end">
+                <button className="btn-main" on onClick={handleSearch}>Buscar</button>
+            </div>
         </div>
         <Table>
             <thead>

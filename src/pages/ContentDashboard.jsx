@@ -7,6 +7,8 @@ import User from '../components/administrator/user/User'
 import Period from '../components/administrator/period/Period'
 import  Report from '../components/administrator/reports/Report'
 import Company from '../components/administrator/company/Company'
+import Printer from '../components/administrator/help/Printer'
+import PrinterApp from '../components/administrator/help/PrinterApp'
 const ContentDashboard = () => {
     //aqui todos los componente customers, users, products, etc
  
@@ -37,6 +39,9 @@ const ContentDashboard = () => {
       }
             {
         view === 'company' && <Company/>
+      }
+      {
+        view === 'help' && <PrinterApp/>
       }
     </>
   )
