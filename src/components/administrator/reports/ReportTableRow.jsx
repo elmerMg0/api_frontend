@@ -3,7 +3,7 @@ const ReportTableRow = ( { sale }) => {
     <tr>
         <td>{sale.fecha}</td>
         <td>{sale.nombres}</td>
-        <td>{sale.total}</td>
+        <td>Bs. {sale.total}</td>
     </tr>
   )
 }

@@ -11,19 +11,22 @@ import { Toaster, toast } from "react-hot-toast";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import ModalCollectMoney from "./ModalCollectMoney";
+import ViewerPrint from "./ViewerPrint";
 const PointOfSale = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const dispatch = useDispatch();
   const orderDetail = useSelector((store) => store.carrito.orderDetail);
-  const userId = useSelector( store => store.user.id);
+  const userId = useSelector((store) => store.user.id);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalPaid, setTotalPaid] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [customers, setCustomers] = useState([]);
-  const [payType, setPayType] = useState('');
-  const [showModalStartPeriod, setShowModalStartPeriod] = useState(false)
+  const [payType, setPayType] = useState("");
+  const [showModalStartPeriod, setShowModalStartPeriod] = useState(false);
   const [existsPeriodActive, setExistsPeriodActive] = useState(false);
+  const [showViewer, setShowViewer] = useState(false);
+  const [infoSale, setInfoSale] = useState(0);
 
   useEffect(() => {
     getCategories();
@@ -73,16 +76,15 @@ const PointOfSale = () => {
         cantidadTotal: totalPrice,
         cantidadPagada: totalPaidSum,
         estado: "pagado",
-        tipoPago: payType.length > 0 ? payType : 'efectivo' 
+        tipoPago: payType.length > 0 ? payType : "efectivo",
       };
 
-      const response = await APISERVICE.post(body, url, params);
-      if (response.success) {
-        dispatch(deleteCarrito());
-        setTotalPaid(0);
-        setPayType('');
+      const { success, sale } = await APISERVICE.post(body, url, params);
+      if (success) {
+        setShowViewer(true);
+        setInfoSale(sale);
         toast.success("Pedido enviado correctamente");
-        generatePDF();
+        //generatePDF();
         setShowModal(false);
       }
     } else {
@@ -130,6 +132,12 @@ const PointOfSale = () => {
     );
   };
 
+  const cleanCarrito = () => {
+    dispatch(deleteCarrito());
+        setTotalPaid(0);
+        setPayType('');
+  };
+
   return (
     <div className="point-of-sale">
       <div className="pos-content">
@@ -153,6 +161,9 @@ const PointOfSale = () => {
         setPayType={setPayType}
       />
       <Toaster />
+      {showViewer && (
+        <ViewerPrint infoSale={infoSale} setShowViewer={setShowViewer} cleanCarrito={cleanCarrito}/>
+      )}
     </div>
   );
 };

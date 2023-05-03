@@ -58,7 +58,7 @@ const [currentTime, setCurrentTime] = useState(new Date().toLocaleTimeString());
             })
           ) : (
             <tr>
-              <td colSpan={5}>No existen pedidos aun :(</td>
+              <td colSpan={5}>No existen pedidos</td>
             </tr>
           )}
           <tr>
