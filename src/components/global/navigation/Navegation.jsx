@@ -15,6 +15,8 @@ import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createView } from "../../../redux/states/dashboard";
 import period from '../../../assets/svg/period.svg';
+import ticket from "./../../../assets/svg/ticket.svg";
+
 const Navegation = () => {
   const dispatch = useDispatch();
   const view = useSelector((store) => store.dashboard);
@@ -161,15 +163,15 @@ const Navegation = () => {
     </li>
   );
 
-  const aboutLink = (
+  const ticketLink = (
     <li className={view === "about" ? "bg-link" : ""}>
       <div
-        onClick={() => handleOnClick("about")}
+        onClick={() => handleOnClick('saleHistory')}
         className="navigation__content"
       >
-        <img src={infoCircle} alt="svgImg" />
+        <img src={ticket} alt="svgImg" />
         <button className="navigation__link" href="">
-          About
+          Historial
         </button>
       </div>
     </li>
@@ -203,9 +205,9 @@ const Navegation = () => {
           {appLink}
           {posLink}
           {userRole.administrador && reportsLink}
-          {helpLink}
-          {userRole.administrador && aboutLink}
+          {userRole.administrador && ticketLink}
           {periodLink}
+          {helpLink}
           <button
             className="btn-maxmin"
             onClick={() => handleNavigationWidth()}

@@ -9,6 +9,7 @@ import  Report from '../components/administrator/reports/Report'
 import Company from '../components/administrator/company/Company'
 import Printer from '../components/administrator/help/Printer'
 import PrinterApp from '../components/administrator/help/PrinterApp'
+import SaleHistory from '../components/administrator/saleHistory/SaleHistory'
 const ContentDashboard = () => {
     //aqui todos los componente customers, users, products, etc
  
@@ -42,6 +43,9 @@ const ContentDashboard = () => {
       }
       {
         view === 'help' && <PrinterApp/>
+      }
+      {
+        view === 'saleHistory' && <SaleHistory/>
       }
     </>
   )

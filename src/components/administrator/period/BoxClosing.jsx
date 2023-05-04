@@ -116,8 +116,8 @@ const BoxClosing = ({ closeBox, infoBoxClose }) => {
       </div>
 
       <div>
-        <button className="btn-main-green">Regresar</button>{" "}
-        <button className="btn-main" onClick={handleCloseBox}>
+        {/* <button className="btn-main-green">Regresar</button>{" "} */}
+        <button className="btn-main-green" onClick={handleCloseBox}>
           Guardar
         </button>
       </div>

@@ -6,13 +6,14 @@ import { APISERVICE } from "../../../services/api.services";
 import ButtonsReport from "./ButtonsReport";
 import ReportTable from "./ReportTable";
 const dateCurrently = new Date();
-const day = dateCurrently.getDate().toString().padStart(2, '0');
+const day = dateCurrently.getDate().toString().padStart(2, "0");
 const month = dateCurrently.getMonth() + 1;
 const year = dateCurrently.getFullYear();
 
-
-const dateCurrentlyString = year+"-" + month.toString().padStart(2, '0') +'-'+day
-const lastMonthDate =  year+"-" + (month - 1).toString().padStart(2, '0') +'-'+day
+const dateCurrentlyString =
+  year + "-" + month.toString().padStart(2, "0") + "-" + day;
+const lastMonthDate =
+  year + "-" + (month - 1).toString().padStart(2, "0") + "-" + day;
 
 const fechaHaceUnMes = new Date(
   dateCurrently.getFullYear(),
@@ -24,7 +25,7 @@ const fechaHaceUnMes = new Date(
   dateCurrently.getMonth(),
   dateCurrently.getDate()
 ); */
-console.log(dateCurrently.getDate())
+console.log(dateCurrently.getDate());
 const fechaHaceUnMesFormateada =
   fechaHaceUnMes.getFullYear() +
   "-" +
@@ -33,17 +34,19 @@ const fechaHaceUnMesFormateada =
   fechaHaceUnMes.getDate().toString().padStart(2, "0");
 
 export const reports = {
-    grafics: "graficos",
-    ventas: "ventas"
-}
+  grafics: "graficos",
+  ventas: "ventas",
+};
 
 const Report = () => {
   const [infoLineChart, setInfoLineChart] = useState({});
   const [infoPieChart, setInfoPieChart] = useState({});
   const [showReport, setShowReport] = useState(reports.grafics);
-  const [salesByDay, setSalesByDay] = useState([])
-  const [users, setUsers] = useState([])
-  const [pageInfoUsers, setPageInfoUsers] = useState({})
+  const [salesByDay, setSalesByDay] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [pageInfoUsers, setPageInfoUsers] = useState({});
+  const [infoSeeker, setInfoSeeker] = useState({});
+  const [infoPagination, setInfoPagination] = useState({})
 
   useEffect(() => {
     getInfoLineChart();
@@ -62,7 +65,7 @@ const Report = () => {
     const { success, salesForDay } = await APISERVICE.post(body, url);
     if (success) {
       setInfoLineChart(salesForDay);
-    }else{
+    } else {
       setInfoLineChart({});
     }
   };
@@ -75,24 +78,28 @@ const Report = () => {
     }
   };
 
-  const getSalesByDay = async ( body ) => {
+  const getSalesByDay = async (pageNumber, body) => {
     setSalesByDay([]);
-    const url = 'venta/get-sales-by-day';
-    const { success, salesForDay } = await APISERVICE.post(body, url);
-    if( success ){
-      setSalesByDay(salesForDay);
+    body = body ? body : infoSeeker;
+    const url = "venta/get-sales-by-day/?";
+    const params = `page=${pageNumber}`;
+
+    const { success, sales, pageInfo } = await APISERVICE.post(body, url, params);
+    if (success) {
+      setSalesByDay(sales);
+      setInfoPagination(pageInfo)
     }
-  }
+  };
 
   const getUsers = async () => {
-    const url = 'usuario/get-users';
-    const { success, users, pageInfo} = await APISERVICE.get(url)
-    if(success){
+    const url = "usuario/get-users";
+    const { success, users, pageInfo } = await APISERVICE.get(url);
+    if (success) {
       setUsers(users);
       setPageInfoUsers(pageInfo);
     }
-    console.log(users)
-  }
+    console.log(users);
+  };
 
   const grafics = (
     <div className="report-grafics">
@@ -105,15 +112,22 @@ const Report = () => {
   );
 
   const sales = (
-    <ReportTable getSalesByDay={getSalesByDay} salesByDay={salesByDay} users={users} pageInfoUsers={pageInfoUsers}/>
-  )
+    <ReportTable
+      getSalesByDay={getSalesByDay}
+      salesByDay={salesByDay}
+      users={users}
+      pageInfoUsers={pageInfoUsers}
+      setInfoSeeker={setInfoSeeker}
+      infoPagination={infoPagination}
+    />
+  );
 
   return (
     <div className="report">
-      <h5>Reportes</h5>
+      <h3>Reportes</h3>
       <ButtonsReport setShowReport={setShowReport} />
-      { showReport === reports.grafics && grafics}
-      { showReport === reports.ventas && sales}
+      {showReport === reports.grafics && grafics}
+      {showReport === reports.ventas && sales}
     </div>
   );
 };

@@ -55,8 +55,8 @@ const BoxOpening = ( {openBox} ) => {
           />
         </FormGroup>
         <div>
-            <button className="btn-main-green">Regresar</button>{" "} 
-            <button className="btn-main" onClick={handleOpenBox}>Guardar</button> 
+           {/*  <button className="btn-main-green">Regresar</button>{" "}  */}
+            <button className="btn-main-green" onClick={handleOpenBox}>Guardar</button> 
         </div>
       </div>
     </div>

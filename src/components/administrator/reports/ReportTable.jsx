@@ -9,13 +9,14 @@ const initialState = {
     usuarioId: ''
 }
 
-const ReportTable = ( {salesByDay, getSalesByDay, users, pageInfoUsers} ) => {
+const ReportTable = ( {salesByDay, getSalesByDay, users, pageInfoUsers, setInfoSeeker, infoPagination} ) => {
 
     const [infoSearchSales, setInfoSearchSales] = useState(initialState)
 
     const handleSearch = () => {
-        console.log(infoSearchSales);
-        getSalesByDay(infoSearchSales)
+        const pageNumber = 1;
+        setInfoSeeker(infoSearchSales)
+        getSalesByDay(pageNumber, infoSearchSales)
     }
 
     const handleOnChange = (e) => {
@@ -69,7 +70,7 @@ const ReportTable = ( {salesByDay, getSalesByDay, users, pageInfoUsers} ) => {
                 {
                     salesByDay.length > 0 &&  <tr>
                     <td colSpan={3}>
-                        <Paginador pageInfo={pageInfoUsers}/>
+                        <Paginador pageInfo={infoPagination} getData={getSalesByDay}/>
                     </td>
                 </tr>
                 }

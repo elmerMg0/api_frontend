@@ -134,7 +134,7 @@ const ViewerPrint = ({ infoSale, setShowViewer, cleanCarrito}) => {
         </PDFViewer>
       </div>
       <div className="viewer-print_btn" onClick={handleCancel}>
-         <button>Cancelar</button>
+         <button>Salir</button>
       </div>
     </div>
     </div>

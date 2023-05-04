@@ -47,12 +47,11 @@ const Period = () => {
 
   const getDetailPeriod = async () => {
     let url = 'periodo/get-detail-period/?';
-    if(periodUser && Object.keys(periodUser).length > 0){
+    if(periodUser && periodUser.id !== undefined){
       let params = `idUser=${user.id}&idPeriod=${periodUser.id}`
       const { success, info} = await APISERVICE.get(url, params);
       if( success ) {
          setInfoBoxClose(info);
-         console.log(info)
         }
       console.log(periodUser);
     }
