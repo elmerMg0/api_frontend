@@ -1,0 +1,56 @@
+:root{
+    --colorMain: #3C8DBB;
+    --colorMainBlack: #367FA6;
+    --colorSecundary: #2D3C42;
+    --colorSecundaryBlack: #222D30;
+    --colorRed: #DA4E3B;
+    --colorRedBlack: #e4412b;
+    --colorWhite: #ffffff;
+    --colorGreen: #00A758;
+}
+
+
+.btn-main {
+    color: var(--colorWhite);
+    background-color: var(--colorMain);
+    padding: 5px 11px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: 0.5s;
+}
+
+.btn-main-red {
+    color: var(--colorWhite);
+    background-color: var(--colorRed);
+    padding: 5px 11px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: 0.5s;
+}
+.btn-main-green {
+    color: var(--colorWhite);
+    background-color: var(--colorGreen);
+    padding: 5px 11px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: 0.5s;
+}
+.btn-main:hover{
+    color: var(--colorWhite);
+    background-color: var(--colorMainBlack);
+}
+
+.btn-main-red:hover{
+    color: var(--colorWhite);
+    background-color: var(--colorRedBlack);
+}
+
+.border-radius-top-rigth{
+    border-top-right-radius: '10px'
+}
+.border-radius-top-left{
+    border-top-left-radius: '10px';
+}
